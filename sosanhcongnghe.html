@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manh Tuong — Founder Công Nghệ & Hệ Sinh Thái Du Lịch Phan Thiết</title>
+  
+    <!-- Open Graph / Zalo / Facebook share preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://manhtuong.dev/">
+    <meta property="og:title" content="Manh Tuong — Founder Công Nghệ & Hệ Sinh Thái Du Lịch Phan Thiết">
+    <meta property="og:description" content="Xây dựng hệ sinh thái du lịch số tại Phan Thiết — từ website, app, kênh TikTok đến cộng đồng du lịch & chiến lược marketing toàn diện.">
+    <meta property="og:image" content="https://i.pinimg.com/736x/2c/a3/d2/2ca3d277c5232d4382a1909463e1310a.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="vi_VN">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://i.pinimg.com/736x/2c/a3/d2/2ca3d277c5232d4382a1909463e1310a.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,700;0,900;1,900&family=Barlow:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0e0e0e; --bg2: #161616; --surface: #1e1e1e;
+      --text: #f0ede8; --text-muted: #888; --accent: #aaff00;
+      --accent-dim: rgba(170,255,0,0.12); --border: #2a2a2a;
+      --php: #8892be; --react: #61dafb; --php-dim: rgba(136,146,190,0.12); --react-dim: rgba(97,218,251,0.12);
+      --green: #4ade80; --red: #f87171;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Barlow', sans-serif; font-weight: 300; overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+    body::after { content:''; position:fixed; inset:0; pointer-events:none; z-index:1000; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); opacity:.22; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 3rem;
+      background: rgba(14,14,14,.95); backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.1rem; letter-spacing: .1em; color: var(--text); text-decoration: none; display: flex; flex-direction: column; line-height: 1; }
+    .nav-logo span { color: var(--accent); font-size: .52rem; letter-spacing: .25em; margin-bottom: 2px; }
+    .nav-back { background: transparent; color: var(--text-muted); font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .72rem; letter-spacing: .14em; padding: .55rem 1.2rem; border: 1px solid var(--border); cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: .4rem; transition: border-color .2s, color .2s; }
+    .nav-back:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── HERO HEADER ── */
+    .page-hero {
+      padding: 5rem 3rem 3rem;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+    .hero-bg-grid { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(170,255,0,.02) 1px, transparent 1px), linear-gradient(90deg, rgba(170,255,0,.02) 1px, transparent 1px); background-size: 60px 60px; }
+    .hero-glow { position: absolute; width: 600px; height: 400px; border-radius: 50%; pointer-events: none; background: radial-gradient(circle, rgba(170,255,0,.05) 0%, transparent 70%); top: -100px; right: -100px; }
+    .page-hero-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+    .section-label { font-family: 'Barlow Condensed', sans-serif; font-size: .68rem; letter-spacing: .3em; color: var(--accent); display: flex; align-items: center; gap: .8rem; margin-bottom: 1rem; }
+    .section-label::before { content: ''; display: block; width: 2rem; height: 1px; background: var(--accent); }
+    .page-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(3rem, 8vw, 7rem); line-height: .9; letter-spacing: -.02em; }
+    .page-title .outline { -webkit-text-stroke: 2px var(--accent); color: transparent; }
+    .page-subtitle { font-size: .95rem; color: var(--text-muted); margin-top: 1.2rem; max-width: 560px; line-height: 1.7; }
+
+    /* Tech badges row */
+    .tech-badges { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
+    .tech-badge { display: flex; align-items: center; gap: .6rem; padding: .6rem 1.2rem; border-radius: 4px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .85rem; letter-spacing: .08em; }
+    .tech-badge-php { background: var(--php-dim); border: 1px solid rgba(136,146,190,.35); color: var(--php); }
+    .tech-badge-react { background: var(--react-dim); border: 1px solid rgba(97,218,251,.35); color: var(--react); }
+    .tech-badge i { font-size: 1.1rem; }
+
+    /* ── MAIN CONTENT ── */
+    .main-content { max-width: 1200px; margin: 0 auto; padding: 4rem 3rem 6rem; }
+
+    /* ── SECTION BLOCKS ── */
+    .tech-section { margin-bottom: 4rem; }
+    .tech-section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+    .tech-section-icon { width: 52px; height: 52px; border-radius: 6px; display: grid; place-items: center; font-size: 1.5rem; flex-shrink: 0; }
+    .php-icon { background: var(--php-dim); border: 1px solid rgba(136,146,190,.3); color: var(--php); }
+    .react-icon { background: var(--react-dim); border: 1px solid rgba(97,218,251,.3); color: var(--react); }
+    .tech-section-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(1.8rem, 4vw, 2.8rem); letter-spacing: -.01em; }
+    .tech-section-title span { font-family: 'JetBrains Mono', monospace; font-weight: 400; font-size: .7em; color: var(--text-muted); margin-left: .5rem; vertical-align: middle; }
+
+    /* ── PROS/CONS GRID ── */
+    .pros-cons-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .pc-card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+    .pc-card-header { padding: 1rem 1.4rem; display: flex; align-items: center; gap: .6rem; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .78rem; letter-spacing: .18em; border-bottom: 1px solid var(--border); }
+    .pc-card-header.pros { color: var(--green); background: rgba(74,222,128,.06); }
+    .pc-card-header.cons { color: var(--red); background: rgba(248,113,113,.06); }
+    .pc-card-header i { font-size: 1rem; }
+    .pc-items { padding: .8rem 0; }
+    .pc-item { display: flex; align-items: flex-start; gap: .9rem; padding: .75rem 1.4rem; transition: background .2s; }
+    .pc-item:hover { background: rgba(255,255,255,.02); }
+    .pc-icon { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; flex-shrink: 0; font-size: .65rem; margin-top: 1px; }
+    .pc-icon.tick { background: rgba(74,222,128,.18); color: var(--green); border: 1px solid rgba(74,222,128,.3); }
+    .pc-icon.cross { background: rgba(248,113,113,.18); color: var(--red); border: 1px solid rgba(248,113,113,.3); }
+    .pc-text { font-size: .88rem; color: #ccc; line-height: 1.5; }
+    .pc-text strong { color: var(--text); font-weight: 600; }
+
+    /* ── TECH ILLUSTRATION ROW ── */
+    .tech-illus-row { display: flex; gap: 1.2rem; margin-bottom: 2rem; }
+    .tech-illus-card { flex: 1; border-radius: 8px; overflow: hidden; position: relative; aspect-ratio: 16/7; border: 1px solid var(--border); }
+    .tech-illus-card img { width: 100%; height: 100%; object-fit: cover; opacity: .55; transition: opacity .4s; }
+    .tech-illus-card:hover img { opacity: .75; }
+    .tech-illus-overlay { position: absolute; inset: 0; display: flex; align-items: flex-end; padding: 1.2rem; background: linear-gradient(to top, rgba(0,0,0,.85) 0%, transparent 60%); }
+    .tech-illus-label { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: .08em; }
+
+    /* ── COMPARISON TABLE ── */
+    .compare-section { margin-top: 5rem; }
+    .compare-table-wrap { overflow-x: auto; border-radius: 8px; border: 1px solid var(--border); margin-top: 2rem; }
+    table { width: 100%; border-collapse: collapse; min-width: 560px; }
+    thead th { padding: 1rem 1.5rem; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .78rem; letter-spacing: .18em; border-bottom: 2px solid var(--border); text-align: left; }
+    thead th:first-child { color: var(--text-muted); background: var(--bg2); }
+    thead th.th-php { color: var(--php); background: var(--php-dim); border-left: 2px solid rgba(136,146,190,.25); }
+    thead th.th-react { color: var(--react); background: var(--react-dim); border-left: 2px solid rgba(97,218,251,.25); }
+    tbody tr { border-bottom: 1px solid var(--border); transition: background .2s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: rgba(255,255,255,.025); }
+    tbody td { padding: 1.1rem 1.5rem; font-size: .88rem; color: #bbb; vertical-align: top; line-height: 1.55; }
+    tbody td:first-child { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .92rem; color: var(--text); letter-spacing: .04em; background: var(--surface); min-width: 160px; }
+    tbody td.td-php { border-left: 2px solid rgba(136,146,190,.15); background: rgba(136,146,190,.03); }
+    tbody td.td-react { border-left: 2px solid rgba(97,218,251,.15); background: rgba(97,218,251,.03); }
+    .badge-fast { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: .65rem; padding: .15rem .5rem; background: rgba(74,222,128,.15); color: var(--green); border-radius: 3px; border: 1px solid rgba(74,222,128,.25); margin-bottom: .3rem; }
+    .badge-slow { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: .65rem; padding: .15rem .5rem; background: rgba(248,113,113,.12); color: var(--red); border-radius: 3px; border: 1px solid rgba(248,113,113,.22); margin-bottom: .3rem; }
+    .badge-ok { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: .65rem; padding: .15rem .5rem; background: rgba(251,191,36,.12); color: #fbbf24; border-radius: 3px; border: 1px solid rgba(251,191,36,.22); margin-bottom: .3rem; }
+
+    /* ── VERDICT ── */
+    .verdict-section { margin-top: 4rem; }
+    .verdict-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
+    .verdict-card { padding: 2rem; border-radius: 8px; position: relative; overflow: hidden; }
+    .verdict-card-php { background: var(--php-dim); border: 1px solid rgba(136,146,190,.3); }
+    .verdict-card-react { background: var(--react-dim); border: 1px solid rgba(97,218,251,.3); }
+    .verdict-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+    .verdict-card-php::before { background: var(--php); }
+    .verdict-card-react::before { background: var(--react); }
+    .verdict-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.4rem; margin-bottom: .8rem; display: flex; align-items: center; gap: .6rem; }
+    .verdict-title-php { color: var(--php); }
+    .verdict-title-react { color: var(--react); }
+    .verdict-use-label { font-family: 'JetBrains Mono', monospace; font-size: .63rem; letter-spacing: .15em; color: var(--text-muted); margin-bottom: .5rem; }
+    .verdict-use-list { list-style: none; display: flex; flex-direction: column; gap: .45rem; }
+    .verdict-use-list li { font-size: .85rem; color: #ccc; display: flex; align-items: flex-start; gap: .5rem; }
+    .verdict-use-list li::before { content: '→'; color: var(--accent); flex-shrink: 0; font-weight: 700; }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); padding: 1.4rem 3rem; display: flex; align-items: center; justify-content: space-between; background: var(--bg2); flex-wrap: wrap; gap: 1rem; }
+    .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; letter-spacing: .08em; font-size: .9rem; }
+    .footer-copy { font-size: .7rem; color: var(--text-muted); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 820px) {
+      nav { padding: 1rem 1.5rem; }
+      .page-hero { padding: 3rem 1.5rem 2rem; }
+      .main-content { padding: 2.5rem 1.5rem 4rem; }
+      .pros-cons-grid { grid-template-columns: 1fr; }
+      .tech-illus-row { flex-direction: column; }
+      .tech-illus-card { aspect-ratio: 16/8; }
+      .verdict-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; text-align: center; }
+      .page-title { font-size: clamp(2.8rem, 10vw, 4rem); }
+    }
+    @media (max-width: 480px) {
+      .tech-illus-row { gap: .8rem; }
+      tbody td { padding: .9rem 1rem; }
+      tbody td:first-child { min-width: 120px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span>● SO SÁNH CÔNG NGHỆ ——— MANH TUONG</span>
+    MANHTUONG.
+  </a>
+  <a href="index.html" class="nav-back"><i class="fa-solid fa-arrow-left"></i> QUAY LẠI</a>
+</nav>
+
+<!-- HERO HEADER -->
+<div class="page-hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="page-hero-inner">
+    <div class="section-label">PHÂN TÍCH KỸ THUẬT</div>
+    <h1 class="page-title">SO SÁNH<br><span class="outline">CÔNG NGHỆ</span></h1>
+    <p class="page-subtitle">Phân tích ưu và nhược điểm của PHP + MySQL vs React + Supabase — giúp bạn chọn stack phù hợp cho từng loại dự án.</p>
+    <div class="tech-badges">
+      <div class="tech-badge tech-badge-php"><i class="fa-brands fa-php"></i> PHP + MySQL</div>
+      <div class="tech-badge tech-badge-react"><i class="fa-brands fa-react"></i> React + Supabase</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main-content">
+
+  <!-- ══ I. PHP + MySQL ══ -->
+  <div class="tech-section reveal">
+    <div class="tech-section-header">
+      <div class="tech-section-icon php-icon"><i class="fa-brands fa-php"></i></div>
+      <div>
+        <div class="section-label" style="margin-bottom:.3rem">STACK I</div>
+        <div class="tech-section-title">PHP + MySQL <span>/ traditional</span></div>
+      </div>
+    </div>
+
+    <!-- Illustration -->
+    <div class="tech-illus-row">
+      <div class="tech-illus-card">
+        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80" alt="PHP code editor">
+        <div class="tech-illus-overlay">
+          <span class="tech-illus-label" style="color:var(--php)"><i class="fa-solid fa-code" style="margin-right:.4rem"></i>Server-side Rendering</span>
+        </div>
+      </div>
+      <div class="tech-illus-card">
+        <img src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=800&q=80" alt="MySQL database">
+        <div class="tech-illus-overlay">
+          <span class="tech-illus-label" style="color:var(--php)"><i class="fa-solid fa-database" style="margin-right:.4rem"></i>Relational Database</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pros-cons-grid">
+      <!-- Pros -->
+      <div class="pc-card reveal d1">
+        <div class="pc-card-header pros"><i class="fa-solid fa-circle-check"></i> ƯU ĐIỂM</div>
+        <div class="pc-items">
+          <div class="pc-item">
+            <div class="pc-icon tick"><i class="fa-solid fa-check"></i></div>
+            <div class="pc-text"><strong>Dễ code, phổ biến</strong> — Cú pháp đơn giản, tài liệu đầy đủ, nhiều developer quen thuộc</div>
+          </div>
+          <div class="pc-item">
+            <div class="pc-icon tick"><i class="fa-solid fa-check"></i></div>
+            <div class="pc-text"><strong>Triển khai nhanh website cơ bản</strong> — Upload file lên hosting là chạy ngay, không cần build hay pipeline phức tạp</div>
+          </div>
+          <div class="pc-item">
+            <div class="pc-icon tick"><i class="fa-solid fa-check"></i></div>
+            <div class="pc-text"><strong>Cộng đồng lớn, nhiều tài liệu</strong> — Hàng triệu resource, plugin, framework hỗ trợ (Laravel, WordPress…)</div>
+          </div>
+          <div class="pc-item">
+            <div class="pc-icon tick"><i class="fa-solid fa-check"></i></div>
+            <div class="pc-text"><strong>Phù hợp CRUD đơn giản, phân quyền</strong> — Làm blog, e-commerce nhỏ, quản lý nội bộ rất nhanh</div>
+          </div>
+          <div class="pc-item">
+            <div class="pc-icon tick"><i class="fa-solid fa-check"></i></div>
+            <div class="pc-text"><strong>Hosting tính phí theo nhu cầu</strong> — Shared hosting giá rẻ, dễ tìm, phù hợp dự án nhỏ và vừa</div>
+          </div>
+        </div>
+      </div>
+      <!-- Cons -->
+      <div class="pc-card reveal d2">
+        <div class="pc-card-header cons"><i class="fa-solid fa-circle-xmark"></i> NHƯỢC ĐIỂM</div>
+        <div class="pc-items">
+          <div class="pc-item">
+            <div class="pc-icon cross"><i class="fa-solid fa-xmark"></i></div>
+            <div class="pc-text"><strong>Cấu trúc code dễ rối khi mở rộng</strong> — Thiếu tổ chức rõ ràng, "spaghetti code" là vấn đề thường gặp</div>
+          </div>
+          <div class="pc-item">
+            <div class="pc-icon cross"><i class="fa-solid fa-xmark"></i></div>
+            <div class="pc-text"><strong>Khó quản lý hệ thống lớn</strong> — Khi scale lên, việc tách module và maintain trở nên tốn kém</div>
+          </div>
+          <div class="pc-item">
+            <div class="pc-icon cross"><i class="fa-solid fa-xmark"></i></div>
+            <div class="pc-text"><strong>Hiệu năng phụ thuộc tối ưu</strong> — Cần cache, query optimization kỹ nếu traffic cao</div>
+          </div>
+          <div class="pc-item">
+            <div class="pc-icon cross"><i class="fa-solid fa-xmark"></i></div>
+            <div class="pc-text"><strong>Bảo trì phức tạp theo thời gian</strong> — Code legacy PHP khó đọc và refactor hơn các stack hiện đại</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ II. React + Supabase ══ -->
+  <div class="tech-section reveal">
+    <div class="tech-section-header">
+      <div class="tech-section-icon react-icon"><i class="fa-brands fa-react"></i></div>
+      <div>
+        <div class="section-label" style="margin-bottom:.3rem">STACK II</div>
+        <div class="tech-section-title">React + Supabase <span>/ modern</span></div>
+      </div>
+    </div>
+
+    <!-- Illustration -->
+    <div class="tech-illus-row">
+      <div class="tech-illus-card">
+        <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80" alt="React component tree">
+        <div class="tech-illus-overlay">
+          <span class="tech-illus-label" style="color:var(--react)"><i class="fa-solid fa-layer-group" style="margin-right:.4rem"></i>Component-based UI</span>
+        </div>
+      </div>
+      <div class="tech-illus-card">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80" alt="Realtime dashboard">
+        <div class="tech-illus-overlay">
+          <span class="tech-illus-label" style="color:var(--react)"><i class="fa-solid fa-bolt" style="margin-right:.4rem"></i>Realtime & Auth Supabase</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pros-cons-grid">
+      <!-- Pros -->
+      <div class="pc-card reveal d1">
+        <div class="pc-card-header pros"><i class="fa-solid fa-circle-check"></i> ƯU ĐIỂM</div>
+        <div class="pc-items">
+          <div class="pc-item">
+            <div class="pc-icon tick"><i class="fa-solid fa-check"></i></div>
+            <div class="pc-text"><strong>Tách frontend / backend rõ ràng</strong> — Kiến trúc sạch, dễ phân công team và maintain lâu dài</div>
+          </div>
+          <div class="pc-item">
+            <div class="pc-icon tick"><i class="fa-solid fa-check"></i></div>
+            <div class="pc-text"><strong>Dễ mở rộng và bảo trì</strong> — Component tái sử dụng, state management rõ ràng</div>
+          </div>
+          <div class="pc-item">
+            <div class="pc-icon tick"><i class="fa-solid fa-check"></i></div>
+            <div class="pc-text"><strong>Realtime, auth có sẵn</strong> — Supabase cung cấp Postgres, Auth, Storage, Realtime subscription tích hợp sẵn</div>
+          </div>
+          <div class="pc-item">
+            <div class="pc-icon tick"><i class="fa-solid fa-check"></i></div>
+            <div class="pc-text"><strong>Code hiện đại, dễ scale</strong> — Ecosystem NPM phong phú, TypeScript support, CI/CD dễ tích hợp</div>
+          </div>
+          <div class="pc-item">
+            <div class="pc-icon tick"><i class="fa-solid fa-check"></i></div>
+            <div class="pc-text"><strong>Giao diện đơn trang — không giật lag</strong> — SPA cho trải nghiệm mượt mà, chuyển trang tức thì</div>
+          </div>
+        </div>
+      </div>
+      <!-- Cons -->
+      <div class="pc-card reveal d2">
+        <div class="pc-card-header cons"><i class="fa-solid fa-circle-xmark"></i> NHƯỢC ĐIỂM</div>
+        <div class="pc-items">
+          <div class="pc-item">
+            <div class="pc-icon cross"><i class="fa-solid fa-xmark"></i></div>
+            <div class="pc-text"><strong>Cần hiểu nhiều công nghệ hơn</strong> — React, Hooks, Supabase SDK, CORS, env variables… đòi hỏi nền tảng vững</div>
+          </div>
+          <div class="pc-item">
+            <div class="pc-icon cross"><i class="fa-solid fa-xmark"></i></div>
+            <div class="pc-text"><strong>Thiết lập ban đầu phức tạp</strong> — Cần cấu hình project, env, deploy pipeline, domain, v.v. trước khi chạy</div>
+          </div>
+          <div class="pc-item">
+            <div class="pc-icon cross"><i class="fa-solid fa-xmark"></i></div>
+            <div class="pc-text"><strong>Phụ thuộc nền tảng Supabase</strong> — Miễn phí 1GB / năm, nếu vượt sẽ tính phí theo usage</div>
+          </div>
+          <div class="pc-item">
+            <div class="pc-icon cross"><i class="fa-solid fa-xmark"></i></div>
+            <div class="pc-text"><strong>Đòi hỏi dev có kinh nghiệm</strong> — Không phù hợp cho người mới bắt đầu hoặc dự án cần ship gấp</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ III. COMPARISON TABLE ══ -->
+  <div class="compare-section reveal">
+    <div class="section-label">BẢNG SO SÁNH</div>
+    <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(2rem,5vw,3.8rem);letter-spacing:-.02em;line-height:.95">
+      SO SÁNH<br><span style="-webkit-text-stroke:2px var(--accent);color:transparent">KHI LÀM WEBSITE</span>
+    </h2>
+
+    <div class="compare-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>TIÊU CHÍ</th>
+            <th class="th-php"><i class="fa-brands fa-php" style="margin-right:.5rem"></i>PHP + MySQL</th>
+            <th class="th-react"><i class="fa-brands fa-react" style="margin-right:.5rem"></i>React + Supabase</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Website cơ bản</td>
+            <td class="td-php">
+              <span class="badge-fast">NHANH</span><br>
+              Đơn giản, chạy ngay — phù hợp landing page, brochure, blog cơ bản
+            </td>
+            <td class="td-react">
+              <span class="badge-ok">CẦN SETUP</span><br>
+              Hiện đại nhưng thời gian khởi đầu lâu hơn, cần kiến thức build tool
+            </td>
+          </tr>
+          <tr>
+            <td>Phân quyền người dùng</td>
+            <td class="td-php">
+                <span class="badge-fast">NHANH</span><br>
+                Tự viết tay session/cookie auth,Phân quyền ,code dễ phức tạp và có lỗ hổng bảo mật nếu không cẩn thận
+            </td>
+            <td class="td-react">
+              <span class="badge-fast">SẴN SÀNG</span><br>
+              Auth tích hợp sẵn trong Supabase — email, OAuth, magic link, RLS bảo vệ data tự động
+            </td>
+          </tr>
+          <tr>
+            <td>Quản lý lâu dài</td>
+            <td class="td-php">
+              <span class="badge-ok">KHÁ KHÓ</span><br>
+              Code có thể rối theo thời gian, cần refactor thường xuyên, khó onboard developer mới
+            </td>
+            <td class="td-react">
+              <span class="badge-fast">DỄ MỞ RỘNG</span><br>
+              Cấu trúc rõ ràng, component tách biệt, TypeScript giúp bắt lỗi sớm, dễ scale team
+            </td>
+          </tr>
+          <tr>
+            <td>Trải nghiệm developer</td>
+            <td class="td-php">
+              <span class="badge-ok">TRUYỀN THỐNG</span><br>
+              Workflow quen thuộc với cách làm cũ, nhưng thiếu hot-reload, modern tooling
+            </td>
+            <td class="td-react">
+              <span class="badge-fast">HIỆN ĐẠI</span><br>
+              HMR, DevTools, linh hoạt tùy chọn thư viện, ecosystem NPM khổng lồ
+            </td>
+          </tr>
+          <tr>
+            <td>Chi phí ban đầu</td>
+            <td class="td-php">
+              <span class="badge-fast">THẤP</span><br>
+              Shared hosting từ 50k–200k/tháng, không cần VPS để chạy dự án nhỏ
+            </td>
+            <td class="td-react">
+              <span class="badge-ok">TRUNG BÌNH</span><br>
+              Supabase free 1GB, Vercel free tier — nhưng khi scale sẽ phát sinh chi phí
+            </td>
+          </tr>
+          <tr>
+            <td>Phù hợp dự án</td>
+            <td class="td-php">
+              Blog, Landing page, CMS, Website doanh nghiệp nhỏ, E-commerce đơn giản
+            </td>
+            <td class="td-react">
+              SaaS, App có realtime, Dashboard, Marketplace, Dự án cần scale dài hạn
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══ VERDICT ══ -->
+  <div class="verdict-section reveal">
+    <div class="section-label">KẾT LUẬN</div>
+    <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(2rem,5vw,3.8rem);letter-spacing:-.02em;line-height:.95;margin-bottom:2rem">
+      DÙNG STACK<br><span style="-webkit-text-stroke:2px var(--accent);color:transparent">NÀO?</span>
+    </h2>
+    <div class="verdict-grid">
+      <div class="verdict-card verdict-card-php reveal d1">
+        <div class="verdict-title verdict-title-php"><i class="fa-brands fa-php"></i> PHP + MySQL</div>
+        <div class="verdict-use-label">NÊN DÙNG KHI —</div>
+        <ul class="verdict-use-list">
+          <li>Cần làm nhanh, chi phí thấp, team nhỏ</li>
+          <li>Dự án website giới thiệu, blog, landing page, Phân Quyền cơ bản</li>
+          <li>Khách hàng quen với WordPress / shared hosting</li>
+          <li>Không yêu cầu realtime hay trải nghiệm app-like</li>
+          <li>Team dev chưa có kinh nghiệm React / Node</li>
+        </ul>
+      </div>
+      <div class="verdict-card verdict-card-react reveal d2">
+        <div class="verdict-title verdict-title-react"><i class="fa-brands fa-react"></i> React + Supabase</div>
+        <div class="verdict-use-label">NÊN DÙNG KHI —</div>
+        <ul class="verdict-use-list">
+          <li>Xây dựng sản phẩm dài hạn, cần scale</li>
+          <li>Cần auth, realtime, phân quyền phức tạp</li>
+          <li>Muốn trải nghiệm người dùng mượt mà, SPA</li>
+          <li>Team có dev JavaScript / TypeScript kinh nghiệm</li>
+          <li>Dự án SaaS, marketplace, dashboard quản lý</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div style="margin-top:3rem;padding:2.5rem;border:1px solid var(--border);background:var(--surface);border-radius:8px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;" class="reveal d3">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.2em;color:var(--text-muted);margin-bottom:.4rem">TƯ VẤN MIỄN PHÍ</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.6rem;line-height:1">Không biết nên chọn stack nào?<br><span style="color:var(--accent)">Liên hệ Manh Tuong nhé!</span></div>
+      </div>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap">
+        <a href="https://zalo.me/0703098480" target="_blank" style="display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#000;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.14em;padding:.85rem 1.8rem;text-decoration:none;transition:opacity .2s" onmouseover="this.style.opacity='.82'" onmouseout="this.style.opacity='1'">
+          <i class="fa-solid fa-comment-dots"></i> ZALO NGAY
+        </a>
+        <a href="https://www.facebook.com/mahtuongs" target="_blank" style="display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--text);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.14em;padding:.85rem 1.8rem;border:1px solid var(--border);text-decoration:none;transition:border-color .2s,color .2s" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">
+          <i class="fa-brands fa-facebook-f"></i> FACEBOOK
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main-content -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">MANHTUONG.</div>
+  <div class="footer-copy">© 2025 Ha Trong Manh Tuong · Phan Thiết, Bình Thuận · 0703 098 480</div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
