@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manh Tuong — Founder Công Nghệ & Hệ Sinh Thái Du Lịch Phan Thiết</title>
+
+  <!-- Open Graph / Zalo / Facebook share preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://manhtuong.dev/">
+  <meta property="og:title" content="Manh Tuong — Founder Công Nghệ & Hệ Sinh Thái Du Lịch Phan Thiết">
+  <meta property="og:description" content="Xây dựng hệ sinh thái du lịch số tại Phan Thiết — từ website, app, kênh TikTok đến cộng đồng du lịch & chiến lược marketing toàn diện.">
+  <meta property="og:image" content="https://scontent.fsgn2-9.fna.fbcdn.net/v/t39.30808-6/655143237_1860213794679961_7069272958195759447_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=Id2ORBEOWH4Q7kNvwGpuKTw&_nc_oc=AdpeWZWIKGV2F0yWMxH8sPGJl8UA315ShnQsuOg-rkm5vgH1smxdFEiByyPcCGJf7KpeG0OGU2BIZp7nnKaLy0Ek&_nc_zt=23&_nc_ht=scontent.fsgn2-9.fna&_nc_gid=Fq1mZ1MkSig6nots4vWMPw&_nc_ss=7a3a8&oh=00_Af1zL-s93tjTzhtjQlSXDJNXv2K41zQ8fg8r8IUUJsB8tQ&oe=69D7ED3F">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="vi_VN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://scontent.fsgn2-9.fna.fbcdn.net/v/t39.30808-6/655143237_1860213794679961_7069272958195759447_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=Id2ORBEOWH4Q7kNvwGpuKTw&_nc_oc=AdpeWZWIKGV2F0yWMxH8sPGJl8UA315ShnQsuOg-rkm5vgH1smxdFEiByyPcCGJf7KpeG0OGU2BIZp7nnKaLy0Ek&_nc_zt=23&_nc_ht=scontent.fsgn2-9.fna&_nc_gid=Fq1mZ1MkSig6nots4vWMPw&_nc_ss=7a3a8&oh=00_Af1zL-s93tjTzhtjQlSXDJNXv2K41zQ8fg8r8IUUJsB8tQ&oe=69D7ED3F">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,700;0,900;1,900&family=Barlow:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0e0e0e; --bg2: #161616; --surface: #1e1e1e;
+      --text: #f0ede8; --text-muted: #888; --accent: #aaff00;
+      --accent-dim: rgba(170,255,0,0.12); --border: #2a2a2a; --terminal-bg: #111;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Barlow', sans-serif; font-weight: 300; overflow-x: hidden; }
+    body.loading { overflow: hidden; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+    /* ══ PRELOADER ══ */
+    #preloader {
+      position: fixed; inset: 0; z-index: 10000;
+      background: #f4f4f4; display: flex; align-items: center; justify-content: center;
+      transition: opacity .7s ease, visibility .7s ease;
+    }
+    #preloader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .pl-content { text-align: center; }
+    .pl-name {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+      font-size: clamp(3rem, 10vw, 7rem); color: #111; letter-spacing: -.02em; line-height: 1;
+      animation: plIn .6s ease forwards;
+    }
+    .pl-role {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: clamp(.85rem, 2vw, 1.1rem); letter-spacing: .45em; color: var(--accent);
+      margin-top: .7rem; animation: plIn .6s .2s ease both;
+    }
+    .pl-bar-wrap { width: 160px; height: 2px; background: #ddd; margin: 1.3rem auto 0; border-radius: 2px; overflow: hidden; animation: plIn .4s .3s ease both; }
+    .pl-bar { height: 100%; width: 0; background: var(--accent); transition: width .05s linear; }
+    .pl-pct { font-family: 'JetBrains Mono', monospace; font-size: .68rem; color: #aaa; margin-top: .5rem; animation: plIn .4s .3s ease both; }
+    @keyframes plIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+
+    /* ── CURSOR ── */
+    #cursor { position: fixed; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width .3s, height .3s, opacity .3s; }
+    #cursor.expand { width: 40px; height: 40px; opacity: .3; }
+
+    /* ── NAV ── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 3rem; background: rgba(14,14,14,.9); backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.1rem; letter-spacing: .1em; color: var(--text); text-decoration: none; display: flex; flex-direction: column; line-height: 1; }
+    .nav-logo span { color: var(--accent); font-size: .52rem; letter-spacing: .25em; margin-bottom: 2px; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-family: 'Barlow Condensed', sans-serif; font-size: .72rem; letter-spacing: .14em; color: var(--text-muted); text-decoration: none; transition: color .25s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+    .nav-cta { background: var(--accent); color: #000; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .72rem; letter-spacing: .14em; padding: .6rem 1.3rem; border: none; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: .4rem; transition: opacity .2s; }
+    .nav-cta:hover { opacity: .82; }
+
+    /* ── SOCIAL SIDEBAR ── */
+    .social-sidebar { position: fixed; right: 1.5rem; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: .7rem; z-index: 50; }
+    .social-sidebar a { width: 36px; height: 36px; border: 1px solid var(--border); display: grid; place-items: center; color: var(--text-muted); text-decoration: none; font-size: .95rem; transition: all .25s; }
+    .social-sidebar a:hover { border-color: var(--accent); color: var(--accent); }
+    .ss-zalo { font-family: 'Barlow Condensed', sans-serif !important; font-weight: 900 !important; font-size: .7rem !important; letter-spacing: -.01em; }
+
+    /* ── HERO ── */
+    #hero { min-height: 100vh; display: flex; align-items: center; padding: 6rem 3rem 3rem; position: relative; overflow: hidden; gap: 4rem; }
+    .hero-bg-grid { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(170,255,0,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(170,255,0,.025) 1px, transparent 1px); background-size: 60px 60px; }
+    .hero-glow { position: absolute; width: 700px; height: 700px; border-radius: 50%; pointer-events: none; background: radial-gradient(circle, rgba(170,255,0,.055) 0%, transparent 70%); top: -150px; left: -150px; }
+    .hero-content { flex: 1; position: relative; z-index: 1; }
+    .hero-badge { font-family: 'Barlow Condensed', sans-serif; font-size: .68rem; letter-spacing: .3em; color: var(--accent); display: flex; align-items: center; gap: .8rem; margin-bottom: 1rem; }
+    .hero-badge::before { content: ''; display: block; width: 2rem; height: 1px; background: var(--accent); }
+    .hero-name-solid { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(5rem, 13vw, 13rem); line-height: .9; letter-spacing: -.02em; color: var(--text); }
+    .hero-name-outline { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(5rem, 13vw, 13rem); line-height: .9; letter-spacing: -.02em; -webkit-text-stroke: 2px var(--accent); color: transparent; }
+    .hero-role { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: clamp(1rem, 2vw, 1.6rem); color: var(--accent); margin: 1.5rem 0 1rem; letter-spacing: .03em; line-height: 1.25; }
+    .hero-desc { max-width: 480px; line-height: 1.75; color: #aaa; font-size: .92rem; margin-bottom: 2.5rem; }
+    .hero-btns { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+    .btn-primary { background: var(--accent); color: #000; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .78rem; letter-spacing: .14em; padding: .85rem 2rem; border: none; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: .6rem; transition: transform .2s, box-shadow .2s; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(170,255,0,.28); }
+    .btn-secondary { background: transparent; color: var(--text); font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .78rem; letter-spacing: .14em; padding: .85rem 2rem; border: 1px solid var(--border); cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: .6rem; transition: border-color .2s, color .2s; }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Terminal */
+    .hero-terminal { width: 400px; flex-shrink: 0; background: var(--terminal-bg); border-radius: 10px; overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,.65), 0 0 0 1px var(--border); position: relative; z-index: 1; transform: perspective(1000px) rotateY(-8deg) rotateX(4deg); transition: transform .6s ease; }
+    .hero-terminal:hover { transform: perspective(1000px) rotateY(0) rotateX(0); }
+    .terminal-bar { background: #1c1c1c; padding: .7rem 1rem; display: flex; align-items: center; gap: .5rem; border-bottom: 1px solid #2a2a2a; }
+    .terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .td-red{background:#ff5f57}.td-yellow{background:#ffbd2e}.td-green{background:#28c840}
+    .terminal-title { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: .63rem; color: #555; }
+    .terminal-body { padding: 1.2rem 1.4rem; font-family: 'JetBrains Mono', monospace; font-size: .76rem; line-height: 2; }
+    .t-prompt{color:#555}.t-cmd{color:var(--text)}.t-output{color:#aaa}.t-green{color:var(--accent)}
+    .t-cursor { display: inline-block; width: 8px; height: 1em; background: var(--accent); vertical-align: middle; animation: blink 1s infinite; }
+    @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
+
+    .scroll-indicator { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: .5rem; font-family: 'Barlow Condensed', sans-serif; font-size: .63rem; letter-spacing: .25em; color: var(--text-muted); }
+    .scroll-line { width: 1px; height: 48px; background: linear-gradient(to bottom, var(--accent), transparent); animation: scrollAnim 2s infinite; }
+    @keyframes scrollAnim{0%,100%{transform:scaleY(1);opacity:1}50%{transform:scaleY(0);opacity:0}}
+
+    /* ── SECTIONS ── */
+    section { position: relative; overflow: hidden; }
+    .section-inner { max-width: 1300px; margin: 0 auto; padding: 7rem 3rem; }
+    .section-label { font-family: 'Barlow Condensed', sans-serif; font-size: .68rem; letter-spacing: .3em; color: var(--accent); display: flex; align-items: center; gap: .8rem; margin-bottom: 1rem; }
+    .section-label::before { content: ''; display: block; width: 2rem; height: 1px; background: var(--accent); }
+    .section-heading { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(3rem, 7.5vw, 7rem); line-height: .9; letter-spacing: -.02em; }
+    .section-heading .outline { -webkit-text-stroke: 2px var(--accent); color: transparent; display: block; }
+
+    /* 3D Reveals */
+    .reveal { opacity: 0; transform: perspective(1200px) rotateX(18deg) translateY(55px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal.visible { opacity: 1; transform: perspective(1200px) rotateX(0) translateY(0); }
+    .reveal-left { opacity: 0; transform: perspective(1200px) rotateY(22deg) translateX(-70px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal-left.visible { opacity: 1; transform: perspective(1200px) rotateY(0) translateX(0); }
+    .reveal-right { opacity: 0; transform: perspective(1200px) rotateY(-22deg) translateX(70px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal-right.visible { opacity: 1; transform: perspective(1200px) rotateY(0) translateX(0); }
+    .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+    /* ── ABOUT ── */
+    #about { background: var(--bg2); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .about-photo-placeholder { width: 100%; aspect-ratio: 4/5; background: var(--surface); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: 2rem; position: relative; overflow: hidden; border: 1px solid var(--border); }
+    .about-photo-placeholder::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(14,14,14,.92) 0%, rgba(14,14,14,.2) 50%, transparent 100%); }
+    .ap-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .4; }
+    .about-name-overlay { position: relative; z-index: 1; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.8rem; line-height: 1; }
+    .about-role-overlay { position: relative; z-index: 1; font-family: 'Barlow Condensed', sans-serif; font-size: .72rem; letter-spacing: .18em; color: var(--accent); display: flex; align-items: center; gap: .5rem; margin-top: .4rem; }
+    .stat-badge { position: absolute; top: 1.5rem; right: -1.5rem; background: var(--bg); border: 1px solid var(--border); padding: 1rem 1.4rem; border-radius: 4px; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+    .stat-badge .num { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 2.5rem; color: var(--accent); line-height: 1; }
+    .stat-badge .lbl { font-size: .68rem; letter-spacing: .1em; color: var(--text-muted); text-transform: uppercase; }
+    .about-desc { font-size: .97rem; line-height: 1.8; color: #bbb; margin: 1.5rem 0; }
+    .about-desc strong { color: var(--text); font-weight: 600; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.5rem; }
+    .tag { border: 1px solid var(--border); padding: .4rem .9rem; font-size: .73rem; color: var(--text-muted); display: flex; align-items: center; gap: .5rem; transition: all .2s; }
+    .tag:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── SERVICES ── */
+    #services { background: var(--bg); }
+    .services-list { margin-top: 3rem; border-top: 1px solid var(--border); }
+    .service-item { display: flex; align-items: center; gap: 2rem; padding: 1.75rem 0; border-bottom: 1px solid var(--border); cursor: pointer; position: relative; overflow: hidden; }
+    .service-item::after { content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 2px; background: var(--accent); transition: width .4s ease; }
+    .service-item:hover::after { width: 100%; }
+    .service-num { font-family: 'JetBrains Mono', monospace; font-size: .72rem; color: var(--text-muted); min-width: 2rem; }
+    .service-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: clamp(1.2rem, 2.5vw, 2.1rem); flex: 1; transition: color .2s; }
+    .service-item:hover .service-name { color: var(--accent); }
+    .service-tags { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .service-tag { font-size: .68rem; padding: .2rem .65rem; border: 1px solid var(--border); color: var(--text-muted); white-space: nowrap; }
+    .service-icon { color: var(--text-muted); width: 24px; text-align: center; font-size: 1rem; transition: color .2s; }
+    .service-item:hover .service-icon { color: var(--accent); }
+
+    /* ── PROJECTS — community-style 9:16 cards ── */
+    #projects { background: var(--bg2); }
+    .projects-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; margin-top: 3rem; }
+
+    /* Shared card style used by both projects & community */
+    .img-card { position: relative; overflow: hidden; border-radius: 6px; aspect-ratio: 9/16; cursor: pointer; border: 1px solid var(--border); }
+    .img-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; display: block; }
+    @keyframes sway { 0%{transform:rotate(0) scale(1.08)} 25%{transform:rotate(1.5deg) scale(1.08)} 50%{transform:rotate(0) scale(1.08)} 75%{transform:rotate(-1.5deg) scale(1.08)} 100%{transform:rotate(0) scale(1.08)} }
+    .img-card:hover img { animation: sway 2s ease-in-out infinite; }
+    .img-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.92) 0%, rgba(0,0,0,.4) 55%, transparent 100%); transition: background .4s; }
+    .img-card:hover .img-card-overlay { background: linear-gradient(to top, rgba(0,0,0,.97) 0%, rgba(0,0,0,.5) 55%, rgba(0,0,0,.1) 100%); }
+    .img-card-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.25rem; }
+    .img-card-tag { font-size: .61rem; letter-spacing: .2em; color: var(--accent); margin-bottom: .3rem; font-family: 'Barlow Condensed', sans-serif; }
+    .img-card-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.02rem; line-height: 1.2; margin-bottom: .3rem; }
+    .img-card-desc { font-size: .73rem; color: #aaa; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: .65rem; }
+    .img-card-stack { display: flex; gap: .3rem; flex-wrap: wrap; margin-bottom: .6rem; }
+    .stack-pill { font-size: .61rem; padding: .15rem .5rem; background: var(--accent-dim); color: var(--accent); border-radius: 2px; }
+    .img-card-btn { display: inline-flex; align-items: center; gap: .4rem; background: var(--accent); color: #000; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .67rem; letter-spacing: .12em; padding: .42rem .88rem; text-decoration: none; opacity: 0; transform: translateY(10px); transition: opacity .35s ease, transform .35s ease; }
+    .img-card:hover .img-card-btn { opacity: 1; transform: translateY(0); }
+    .img-card-btn:hover { background: #ccff33; }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--bg); }
+    .creative-skills { display: grid; grid-template-columns: repeat(5,1fr); gap: 1rem; margin-top: 3rem; margin-bottom: 2rem; }
+    .creative-skill-card { background: var(--surface); border: 1px solid var(--border); padding: 1.4rem 1rem; text-align: center; transition: border-color .25s, transform .25s; }
+    .creative-skill-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .creative-skill-card i { font-size: 1.6rem; color: var(--accent); margin-bottom: .7rem; display: block; }
+    .creative-skill-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .82rem; letter-spacing: .05em; color: var(--text); margin-bottom: .6rem; }
+    .cskill-bar-wrap { width: 100%; height: 2px; background: var(--border); border-radius: 2px; overflow: hidden; }
+    .cskill-bar { height: 100%; background: var(--accent); width: 0; transition: width 1.2s ease; border-radius: 2px; }
+    .creative-skill-pct { font-size: .62rem; color: var(--text-muted); margin-top: .35rem; font-family: 'JetBrains Mono', monospace; }
+    .skills-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+    .skill-group { padding: 2rem; border: 1px solid var(--border); background: var(--surface); }
+    .skill-group-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .92rem; letter-spacing: .1em; color: var(--accent); margin-bottom: 1.5rem; padding-bottom: .8rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: .6rem; }
+    .skill-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+    .skill-label { font-size: .8rem; color: var(--text-muted); min-width: 75px; }
+    .skill-bar-wrap { flex: 1; height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+    .skill-bar { height: 100%; background: var(--accent); border-radius: 2px; width: 0; transition: width 1.2s ease; }
+    .skill-pct { font-size: .68rem; color: var(--text-muted); min-width: 2.5rem; text-align: right; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--bg2); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; }
+    .contact-left { padding: 5rem 4rem 5rem 3rem; }
+    .contact-info { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.4rem; }
+    .contact-row { display: flex; gap: 1rem; align-items: flex-start; }
+    .contact-icon { width: 42px; height: 42px; border: 1px solid var(--border); display: grid; place-items: center; color: var(--accent); font-size: 1rem; flex-shrink: 0; }
+    .contact-lbl { font-size: .62rem; letter-spacing: .15em; color: var(--text-muted); margin-bottom: .2rem; }
+    .contact-val { font-size: .9rem; color: var(--text); text-decoration: none; transition: color .2s; }
+    .contact-val:hover { color: var(--accent); }
+    .contact-right { background: var(--accent); padding: 5rem 4rem; }
+    .contact-form-label { font-size: .62rem; letter-spacing: .25em; color: rgba(0,0,0,.55); margin-bottom: 2.5rem; display: flex; align-items: center; gap: .8rem; }
+    .contact-form-label::before { content: ''; width: 2rem; height: 1px; background: rgba(0,0,0,.35); display: block; }
+    .form-heading { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(2rem, 4vw, 3.6rem); line-height: .95; color: #000; margin-bottom: 2rem; }
+    .form-field { margin-bottom: 1.25rem; }
+    .form-field label { display: flex; align-items: center; gap: .5rem; font-size: .62rem; letter-spacing: .2em; color: rgba(0,0,0,.6); margin-bottom: .4rem; }
+    .form-field input, .form-field textarea { width: 100%; padding: .85rem 1rem; background: rgba(255,255,255,.25); border: 1px solid rgba(0,0,0,.18); color: #000; font-family: 'Barlow', sans-serif; font-size: .88rem; outline: none; transition: border-color .2s; border-radius: 0; -webkit-appearance: none; }
+    .form-field input::placeholder, .form-field textarea::placeholder { color: rgba(0,0,0,.38); }
+    .form-field input:focus, .form-field textarea:focus { border-color: rgba(0,0,0,.6); background: rgba(255,255,255,.35); }
+    .form-field textarea { min-height: 95px; resize: vertical; }
+    .btn-submit { width: 100%; padding: .95rem; background: #fff; color: #000; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .82rem; letter-spacing: .18em; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: .6rem; transition: background .2s, color .2s; }
+    .btn-submit:hover { background: #111; color: #fff; }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); padding: 1.4rem 3rem; display: flex; align-items: center; justify-content: space-between; background: var(--bg2); flex-wrap: wrap; gap: 1rem; }
+    .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; letter-spacing: .08em; font-size: .9rem; }
+    .footer-copy { font-size: .7rem; color: var(--text-muted); }
+    .footer-socials { display: flex; gap: .6rem; }
+    .footer-socials a { width: 32px; height: 32px; border: 1px solid var(--border); display: grid; place-items: center; color: var(--text-muted); text-decoration: none; font-size: .85rem; transition: all .2s; }
+    .footer-socials a:hover { border-color: var(--accent); color: var(--accent); }
+    .f-zalo { font-family: 'Barlow Condensed', sans-serif !important; font-weight: 900 !important; font-size: .7rem !important; }
+
+    body::after { content:''; position:fixed; inset:0; pointer-events:none; z-index:1000; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); opacity:.22; }
+
+    /* Community grid base */
+    .community-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.2rem; margin-top: 3rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .projects-grid { grid-template-columns: repeat(3,1fr); }
+      .community-grid { grid-template-columns: repeat(3,1fr); }
+      .creative-skills { grid-template-columns: repeat(3,1fr); }
+    }
+    @media (max-width: 820px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .section-inner { padding: 5rem 1.5rem; }
+      #hero { padding: 6rem 1.5rem 3rem; flex-direction: column; }
+      .hero-terminal { width: 100%; transform: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .stat-badge { right: 0; }
+      .projects-grid { grid-template-columns: repeat(2,1fr); }
+      .community-grid { grid-template-columns: repeat(2,1fr); }
+      /* scroll hint indicator */
+      .projects-grid::after, .community-grid::after { content: ''; display: none; }
+      .creative-skills { grid-template-columns: repeat(2,1fr); }
+      .skills-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .contact-left { padding: 3rem 1.5rem; }
+      .contact-right { padding: 3rem 1.5rem; }
+      footer { flex-direction: column; text-align: center; }
+      .social-sidebar { display: none; }
+    }
+    @media (max-width: 480px) {
+      .projects-grid {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: .9rem;
+        padding-bottom: 1rem;
+        margin-left: -1.5rem;
+        margin-right: -1.5rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+      .projects-grid .img-card {
+        flex: 0 0 72vw;
+        max-width: 72vw;
+        scroll-snap-align: start;
+        aspect-ratio: 9/16;
+      }
+      .community-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: .9rem;
+      }
+      .community-grid .img-card {
+        aspect-ratio: 9/16;
+      }
+      .creative-skills { grid-template-columns: repeat(2,1fr); }
+    }
+
+    /* ── SCROLL HINT ── */
+    .scroll-hint { display: none; }
+    @media (max-width: 480px) {
+      .scroll-hint {
+        display: flex; align-items: center; gap: .4rem;
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: .63rem; letter-spacing: .2em;
+        color: var(--text-muted); margin-top: .6rem;
+      }
+      .scroll-hint::after { content: '→'; color: var(--accent); }
+    }
+  </style>
+</head>
+<body class="loading">
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="pl-content">
+    <div class="pl-name">MANH TUONG</div>
+    <div class="pl-role">DEV.</div>
+    <div class="pl-bar-wrap"><div class="pl-bar" id="plBar"></div></div>
+    <div class="pl-pct" id="plPct">0%</div>
+  </div>
+</div>
+
+<div id="cursor"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    <span>● SẴN SÀNG NHẬN DỰ ÁN ——— PHAN THIẾT, VN</span>
+    MANHTUONG.
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">GIỚI THIỆU</a></li>
+    <li><a href="#services">DỊCH VỤ</a></li>
+    <li><a href="#projects">DỰ ÁN</a></li>
+    <li><a href="#community">CỘNG ĐỒNG</a></li>
+    <li><a href="#skills">KỸ NĂNG</a></li>
+    <li><a href="#contact">LIÊN HỆ</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta"><i class="fa-solid fa-paper-plane"></i> LIÊN HỆ NGAY</a>
+</nav>
+
+<!-- SOCIAL SIDEBAR -->
+<aside class="social-sidebar">
+  <a href="https://www.facebook.com/mahtuongs" target="_blank" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+  <a href="https://zalo.me/0703098480" target="_blank" title="Zalo" class="ss-zalo">Zl</a>
+  <a href="https://www.instagram.com" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+  <a href="https://github.com" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+  <a href="https://tiktok.com" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+</aside>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-badge reveal">SẴN SÀNG NHẬN DỰ ÁN</div>
+    <div class="hero-name-solid reveal d1">MANH</div>
+    <div class="hero-name-outline reveal d2">TUONG</div>
+    <div class="hero-role reveal d3"><i class="fa-solid fa-rocket" style="margin-right:.4rem"></i>FOUNDER CÔNG NGHỆ &amp; HỆ SINH THÁI DU LỊCH PHAN THIẾT</div>
+    <p class="hero-desc reveal d4">Xây dựng hệ sinh thái du lịch số tại Phan Thiết — từ website, app, kênh TikTok đến cộng đồng du lịch &amp; chiến lược marketing toàn diện.</p>
+    <div class="hero-btns reveal d4">
+      <a href="#projects" class="btn-primary"><i class="fa-solid fa-star"></i> XEM DỰ ÁN</a>
+      <a href="#contact" class="btn-secondary"><i class="fa-solid fa-envelope"></i> LIÊN HỆ NGAY</a>
+    </div>
+  </div>
+  <div class="hero-terminal reveal-right">
+    <div class="terminal-bar">
+      <div class="terminal-dot td-red"></div><div class="terminal-dot td-yellow"></div><div class="terminal-dot td-green"></div>
+      <span class="terminal-title">profile.json</span>
+    </div>
+    <div class="terminal-body">
+      <div><span class="t-prompt">► ~ </span><span class="t-cmd" id="cmd1"></span></div>
+      <div class="t-output" id="out1" style="display:none">Ha Trong Manh Tuong</div>
+      <div id="line2" style="display:none"><span class="t-prompt">► ~ </span><span class="t-cmd" id="cmd2"></span></div>
+      <div class="t-green" id="out2" style="display:none">Founder · Hệ sinh thái Phan Thiết</div>
+      <div id="line3" style="display:none"><span class="t-prompt">► ~ </span><span class="t-cmd" id="cmd3"></span></div>
+      <div id="out3" style="display:none">
+        <div class="t-green">✓ 3 năm kinh nghiệm thực chiến</div>
+        <div class="t-green">✓ 505+ dự án hoàn thành</div>
+        <div class="t-green">✓ Phan Thiết ecosystem <span class="t-cursor"></span></div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator"><span>CUỘN XUỐNG</span><div class="scroll-line"></div></div>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div style="position:relative" class="reveal-left">
+        <div class="about-photo-placeholder">
+          <img class="ap-img" src="https://scontent.fsgn2-9.fna.fbcdn.net/v/t39.30808-6/655143237_1860213794679961_7069272958195759447_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=Id2ORBEOWH4Q7kNvwGpuKTw&_nc_oc=AdpeWZWIKGV2F0yWMxH8sPGJl8UA315ShnQsuOg-rkm5vgH1smxdFEiByyPcCGJf7KpeG0OGU2BIZp7nnKaLy0Ek&_nc_zt=23&_nc_ht=scontent.fsgn2-9.fna&_nc_gid=_Jub6ZQOPdO6QB9uDuOm3g&_nc_ss=7a3a8&oh=00_Af2OvOLZ_shBa71vByoFjNkLbfLeOh6WKs7nwmw_rejfoA&oe=69D7ED3F" alt="Phan Thiet" />
+          <div class="about-name-overlay">HA TRONG<br>MANH TUONG</div>
+          <div class="about-role-overlay"><i class="fa-solid fa-circle" style="font-size:.5rem"></i> FOUNDER · PHAN THIẾT</div>
+        </div>
+        <div class="stat-badge">
+          <div class="num">505+</div>
+          <div class="lbl">Dự Án Hoàn Thành</div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="section-label">GIỚI THIỆU</div>
+        <h2 class="section-heading">VỀ<br><span class="outline">TÔI</span></h2>
+        <p class="about-desc">Xin chào! Tôi là <strong>Ha Trong Manh Tuong</strong> — Founder Công Nghệ &amp; người xây dựng <strong>Hệ sinh thái du lịch Phan Thiết</strong>. Tôi kết hợp công nghệ, nội dung sáng tạo và marketing đưa Phan Thiết lên bản đồ du lịch số Việt Nam.</p>
+        <p class="about-desc">Với hơn <strong>3 năm kinh nghiệm</strong>, tôi đã hoàn thành 505+ dự án từ website, app đến kênh TikTok </p>
+        <p class="about-desc">Sở thích : <strong>Xây dựng hệ thống data cho doanh nghiệp</strong>tạo thêm các tệp khách hàng đa dạng cho doanh nghiệp </p>
+        <div class="skill-tags">
+          <span class="tag"><i class="fa-brands fa-react"></i> React / Next.js</span>
+          <span class="tag"><i class="fa-solid fa-palette"></i> UI / UX Design</span>
+          <span class="tag"><i class="fa-brands fa-node-js"></i> Node.js</span>
+          <span class="tag"><i class="fa-brands fa-tiktok"></i> TikTok</span>
+          <span class="tag"><i class="fa-solid fa-robot"></i> AI Integration</span>
+          <span class="tag"><i class="fa-solid fa-camera"></i> Quay Phim / Chụp Ảnh</span>
+          <span class="tag"><i class="fa-solid fa-bullhorn"></i> Chạy Ads</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SERVICES ══ -->
+<section id="services">
+  <div class="section-inner">
+    <div class="section-label reveal">DỊCH VỤ</div>
+    <h2 class="section-heading reveal d1">DỊCH<br><span class="outline">VỤ</span></h2>
+    <div class="services-list">
+      <div class="service-item reveal"><span class="service-num">01</span><span class="service-name">QUAY PHIM &amp; CHỤP ẢNH</span><div class="service-tags"><span class="service-tag">Reels</span><span class="service-tag">TikTok</span><span class="service-tag">Drone</span></div><i class="fa-solid fa-video service-icon"></i></div>
+      <div class="service-item reveal d1"><span class="service-num">02</span><span class="service-name">XÂY DỰNG KÊNH TIKTOK</span><div class="service-tags"><span class="service-tag">Content</span><span class="service-tag">Trend</span><span class="service-tag">Viral</span></div><i class="fa-brands fa-tiktok service-icon"></i></div>
+      <div class="service-item reveal d2"><span class="service-num">03</span><span class="service-name">THIẾT KẾ ĐỒ HỌA &amp; BRANDING</span><div class="service-tags"><span class="service-tag">Figma</span><span class="service-tag">Logo</span><span class="service-tag">Banner</span></div><i class="fa-solid fa-pen-nib service-icon"></i></div>
+      <div class="service-item reveal d3"><span class="service-num">04</span><span class="service-name">CHẠY ADS &amp; DIGITAL MARKETING</span><div class="service-tags"><span class="service-tag">Facebook Ads</span><span class="service-tag">Google Ads</span><span class="service-tag">TikTok Ads</span></div><i class="fa-solid fa-chart-line service-icon"></i></div>
+      <div class="service-item reveal d4"><span class="service-num">05</span><span class="service-name">WEB DEVELOPMENT</span><div class="service-tags"><span class="service-tag">React</span><span class="service-tag">Next.js</span><span class="service-tag">Vue</span></div><i class="fa-solid fa-globe service-icon"></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROJECTS ══ -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-label reveal">PORTFOLIO</div>
+    <h2 class="section-heading reveal d1">DỰ ÁN - Phan Thiết<br><span class="outline">CỦA TÔI</span></h2>
+    <div class="projects-grid">
+
+      <div class="img-card reveal d1">
+        <img src="image/caphefika.jpg" alt="Hệ sinh thái du lịch" loading="lazy">
+        <div class="img-card-overlay"></div>
+        <div class="img-card-content">
+          <div class="img-card-tag">DU LỊCH PHAN THIẾT</div>
+          <div class="img-card-title">Hệ Sinh Thái Du Lịch Phan Thiết</div>
+          <div class="img-card-desc">Quán cà phê của một người anh chuyên về mảng cà phê và thuê xe máy ở Phan Thiết</div>
+          <div class="img-card-stack"><span class="stack-pill">Tiktok</span><span class="stack-pill">Fanpage</span><span class="stack-pill">Maps</span></div>
+          <a href="https://www.tiktok.com/@co.co.fika.coffee" class="img-card-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> XEM CHI TIẾT</a>
+        </div>
+      </div>
+
+      <div class="img-card reveal d2">
+        <img src="image/suoilangau.jpg" alt="TikTok" loading="lazy">
+        <div class="img-card-overlay"></div>
+        <div class="img-card-content">
+          <div class="img-card-tag">DU LỊCH PHAN THIẾT</div>
+          <div class="img-card-title">Hệ Sinh Thái Du Lịch Phan Thiết</div>
+          <div class="img-card-desc">Suối La Ngâu ở Tánh Linh đây là địa điểm mà mình thường lên xả stress rất chill</div>
+          <div class="img-card-stack"><span class="stack-pill">Tiktok</span><span class="stack-pill">Fanpage</span><span class="stack-pill">Maps</span></div>
+          <a href="https://www.tiktok.com/@sui.la.ngu.phm.on" class="img-card-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> XEM CHI TIẾT</a>
+        </div>
+      </div>
+
+      <div class="img-card reveal d3">
+        <img src="image/cocowatch.jpg" alt="Tour đặt" loading="lazy">
+        <div class="img-card-overlay"></div>
+        <div class="img-card-content">
+          <div class="img-card-tag">Bán Hàng</div>
+          <div class="img-card-title">Thương Hiệu Đồng Hồ</div>
+          <div class="img-card-desc">Xây dựng từ lúc còn ở Phan Thiết đến các cơ sở đang phát triển tại TPHCM và Hà Nội</div>
+          <div class="img-card-stack"><span class="stack-pill">Tiktok</span><span class="stack-pill">Fanpage</span><span class="stack-pill">Maps</span></div>
+          <a href="https://www.tiktok.com/@orderbycoco" class="img-card-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> XEM CHI TIẾT</a>
+        </div>
+      </div>
+
+      <div class="img-card reveal d4">
+        <img src="image/KHcaphe.jpg" alt="Mobile App" loading="lazy">
+        <div class="img-card-overlay"></div>
+        <div class="img-card-content">
+          <div class="img-card-tag">Vibe Chill</div>
+          <div class="img-card-title">Chia Sẽ Kiến Thức</div>
+          <div class="img-card-desc">Một người anh ở Phan Thiết chuyên về mảng cà phê được vinh hạnh cùng anh ngồi thưởng thức cà phê và trao đổi xây kênh Tiktok</div>
+          <div class="img-card-stack"><span class="stack-pill">Tiktok</span><span class="stack-pill">Fanpage</span><span class="stack-pill">Maps</span></div>
+          <a href="https://www.tiktok.com/@khcoffee1" class="img-card-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> XEM CHI TIẾT</a>
+        </div>
+      </div>
+
+    </div>
+    <div class="scroll-hint">VUỐT ĐỂ XEM THÊM</div>
+  </div>
+</section>
+
+<!-- ══ COMMUNITY ══ -->
+<section id="community">
+  <div class="section-inner">
+    <div class="section-label reveal">HOẠT ĐỘNG XÃ HỘI</div>
+    <h2 class="section-heading reveal d1">CỘNG ĐỒNG - Phan Thiết<br><span class="outline">CỦA TÔI</span></h2>
+    <div class="community-grid">
+
+      <div class="img-card reveal d1">
+        <img src="image/gr_01.jpg" alt="Cộng đồng du lịch" loading="lazy">
+        <div class="img-card-overlay"></div>
+        <div class="img-card-content">
+          <div class="img-card-tag">DU LỊCH SỐ</div>
+          <div class="img-card-title">Cộng Đồng 1 Triệu Thành Viên</div>
+          <div class="img-card-desc">Nhóm chia sẻ trải nghiệm, cẩm nang du lịch và kết nối du khách yêu mến Phan Thiết với 30K+ thành viên.</div>
+          <a href="https://www.facebook.com/groups/4284764864943848" target="_blank" class="img-card-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> XEM CHI TIẾT</a>
+        </div>
+      </div>
+
+      <div class="img-card reveal d2">
+        <img src="image/gr_02.jpg" alt="Tech Community" loading="lazy">
+        <div class="img-card-overlay"></div>
+        <div class="img-card-content">
+          <div class="img-card-tag">DU LỊCH SỐ</div>
+          <div class="img-card-title">Cộng Đồng 70k Thành Viên</div>
+          <div class="img-card-desc">Cộng đồng lập trình viên và founder startup tại Bình Thuận — chia sẻ kiến thức và cơ hội hợp tác.</div>
+          <a href="https://www.facebook.com/groups/494674006940872" target="_blank" class="img-card-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> XEM CHI TIẾT</a>
+        </div>
+      </div>
+
+      <div class="img-card reveal d3">
+        <img src="image/gr_03.jpg" alt="TikTok Creators" loading="lazy">
+        <div class="img-card-overlay"></div>
+        <div class="img-card-content">
+          <div class="img-card-tag">DU LỊCH SỐ</div>
+          <div class="img-card-title">Cộng Đồng 60k Thành Viên</div>
+          <div class="img-card-desc">Hội content creator TikTok chuyên về du lịch biển — viral và xây kênh triệu view từ Phan Thiết.</div>
+          <a href="https://www.facebook.com/groups/1067568821838109" target="_blank" class="img-card-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> XEM CHI TIẾT</a>
+        </div>
+      </div>
+
+      <div class="img-card reveal d4">
+        <img src="image/gr_04.jpg" alt="Freelancer" loading="lazy">
+        <div class="img-card-overlay"></div>
+        <div class="img-card-content">
+          <div class="img-card-tag">FREELANCE &amp; BIZ</div>
+          <div class="img-card-title">Freelancer &amp; SME Phan Thiết</div>
+          <div class="img-card-desc">Kết nối freelancer, hộ kinh doanh và doanh nghiệp nhỏ tại Phan Thiết để phát triển kinh tế địa phương.</div>
+          <a href="https://www.facebook.com/groups/430005563486088" target="_blank" class="img-card-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> XEM CHI TIẾT</a>
+        </div>
+      </div>
+
+    </div>
+    <div class="scroll-hint">VUỐT ĐỂ XEM THÊM</div>
+  </div>
+</section>
+
+<!-- ══ SKILLS ══ -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-label reveal">NĂNG LỰC</div>
+    <h2 class="section-heading reveal d1">KỸ<br><span class="outline">NĂNG</span></h2>
+
+    <!-- Creative skills — TOP -->
+    <div class="creative-skills">
+      <div class="creative-skill-card reveal d1"><i class="fa-solid fa-video"></i><div class="creative-skill-name">QUAY PHIM</div><div class="cskill-bar-wrap"><div class="cskill-bar" data-width="90"></div></div><div class="creative-skill-pct">90%</div></div>
+      <div class="creative-skill-card reveal d2"><i class="fa-solid fa-pen-fancy"></i><div class="creative-skill-name">VIẾT CONTENT</div><div class="cskill-bar-wrap"><div class="cskill-bar" data-width="88"></div></div><div class="creative-skill-pct">88%</div></div>
+      <div class="creative-skill-card reveal d3"><i class="fa-solid fa-chart-line"></i><div class="creative-skill-name">CHẠY ADS</div><div class="cskill-bar-wrap"><div class="cskill-bar" data-width="85"></div></div><div class="creative-skill-pct">85%</div></div>
+      <div class="creative-skill-card reveal d4"><i class="fa-brands fa-tiktok"></i><div class="creative-skill-name">XÂY KÊNH TIKTOK</div><div class="cskill-bar-wrap"><div class="cskill-bar" data-width="92"></div></div><div class="creative-skill-pct">92%</div></div>
+      <div class="creative-skill-card reveal d4"><i class="fa-solid fa-people-group"></i><div class="creative-skill-name">TẠO CỘNG ĐỒNG</div><div class="cskill-bar-wrap"><div class="cskill-bar" data-width="87"></div></div><div class="creative-skill-pct">87%</div></div>
+    </div>
+
+    <!-- Tech skills -->
+    <div class="skills-grid">
+      <div class="skill-group reveal d1">
+        <div class="skill-group-title"><i class="fa-brands fa-react"></i> FRONTEND</div>
+        <div class="skill-row"><span class="skill-label">React</span><div class="skill-bar-wrap"><div class="skill-bar" data-width="95"></div></div><span class="skill-pct">95%</span></div>
+        <div class="skill-row"><span class="skill-label">Next.js</span><div class="skill-bar-wrap"><div class="skill-bar" data-width="90"></div></div><span class="skill-pct">90%</span></div>
+        <div class="skill-row"><span class="skill-label">Vue.js</span><div class="skill-bar-wrap"><div class="skill-bar" data-width="80"></div></div><span class="skill-pct">80%</span></div>
+        <div class="skill-row"><span class="skill-label">CSS / SASS</span><div class="skill-bar-wrap"><div class="skill-bar" data-width="92"></div></div><span class="skill-pct">92%</span></div>
+      </div>
+      <div class="skill-group reveal d2">
+        <div class="skill-group-title"><i class="fa-solid fa-server"></i> BACKEND</div>
+        <div class="skill-row"><span class="skill-label">Node.js</span><div class="skill-bar-wrap"><div class="skill-bar" data-width="88"></div></div><span class="skill-pct">88%</span></div>
+        <div class="skill-row"><span class="skill-label">Python</span><div class="skill-bar-wrap"><div class="skill-bar" data-width="82"></div></div><span class="skill-pct">82%</span></div>
+        <div class="skill-row"><span class="skill-label">PHP / WP</span><div class="skill-bar-wrap"><div class="skill-bar" data-width="90"></div></div><span class="skill-pct">90%</span></div>
+        <div class="skill-row"><span class="skill-label">Database</span><div class="skill-bar-wrap"><div class="skill-bar" data-width="85"></div></div><span class="skill-pct">85%</span></div>
+      </div>
+      <div class="skill-group reveal d3">
+        <div class="skill-group-title"><i class="fa-solid fa-robot"></i> AI / TOOLS</div>
+        <div class="skill-row"><span class="skill-label">Flutter</span><div class="skill-bar-wrap"><div class="skill-bar" data-width="85"></div></div><span class="skill-pct">85%</span></div>
+        <div class="skill-row"><span class="skill-label">AI / LLM</span><div class="skill-bar-wrap"><div class="skill-bar" data-width="80"></div></div><span class="skill-pct">80%</span></div>
+        <div class="skill-row"><span class="skill-label">UI / UX</span><div class="skill-bar-wrap"><div class="skill-bar" data-width="88"></div></div><span class="skill-pct">88%</span></div>
+        <div class="skill-row"><span class="skill-label">DevOps</span><div class="skill-bar-wrap"><div class="skill-bar" data-width="75"></div></div><span class="skill-pct">75%</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact">
+  <div class="section-inner" style="padding:0">
+    <div class="contact-grid">
+      <div class="contact-left reveal-left">
+        <div class="section-label">LIÊN HỆ</div>
+        <h2 class="section-heading">LIÊN<br><span class="outline">HỆ</span></h2>
+        <p style="color:#888;font-size:.9rem;margin-top:1rem;line-height:1.75">Sẵn sàng hợp tác cho dự án của bạn. Liên hệ ngay để được tư vấn miễn phí và nhận báo giá trong 24 giờ.</p>
+        <div class="contact-info">
+          <div class="contact-row">
+            <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+            <div><div class="contact-lbl">ĐIỆN THOẠI</div><a href="tel:0703098480" class="contact-val">0703 098 480</a></div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon"><i class="fa-brands fa-facebook-f"></i></div>
+            <div><div class="contact-lbl">FACEBOOK</div><a href="https://www.facebook.com/mahtuongs" target="_blank" class="contact-val">Ha Trong Manh Tuong</a></div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon"><i class="fa-brands fa-instagram"></i></div>
+            <div><div class="contact-lbl">INSTAGRAM</div><a href="https://www.instagram.com" target="_blank" class="contact-val">@manhtuong</a></div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon" style="font-family:'Barlow Condensed';font-weight:900;font-size:.72rem">Zl</div>
+            <div><div class="contact-lbl">ZALO</div><a href="https://zalo.me/0703098480" target="_blank" class="contact-val">0703 098 480</a></div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <div><div class="contact-lbl">ĐỊA CHỈ</div><div class="contact-val">Phan Thiết, Bình Thuận, Việt Nam</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-right reveal-right">
+        <div class="contact-form-label">GỬI TIN NHẮN</div>
+        <div class="form-heading">BẮT ĐẦU<br>DỰ ÁN</div>
+        <div class="form-field"><label><i class="fa-solid fa-user"></i> HỌ VÀ TÊN</label><input type="text" placeholder="Nguyễn Văn A"></div>
+        <div class="form-field"><label><i class="fa-solid fa-envelope"></i> EMAIL</label><input type="email" placeholder="email@example.com"></div>
+        <div class="form-field"><label><i class="fa-solid fa-comment-dots"></i> MÔ TẢ DỰ ÁN</label><textarea placeholder="Kể cho tôi nghe về dự án của bạn..."></textarea></div>
+        <button class="btn-submit"><i class="fa-solid fa-paper-plane"></i> GỬI TIN NHẮN</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-logo">MANHTUONG.</div>
+  <div class="footer-copy">© 2025 Ha Trong Manh Tuong · Phan Thiết, Bình Thuận · 0703 098 480</div>
+  <div class="footer-socials">
+    <a href="https://www.facebook.com/mahtuongs" target="_blank" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+    <a href="https://zalo.me/0703098480" target="_blank" title="Zalo" class="f-zalo">Zl</a>
+    <a href="https://www.instagram.com" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    <a href="https://github.com" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+    <a href="https://tiktok.com" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+  </div>
+</footer>
+
+<script>
+/* ══ PRELOADER ══ */
+(function(){
+  const bar=document.getElementById('plBar'), pct=document.getElementById('plPct'), pl=document.getElementById('preloader');
+  let p=0;
+  const iv=setInterval(()=>{
+    p+=Math.random()*7+2;
+    if(p>=100){ p=100; clearInterval(iv); }
+    bar.style.width=p+'%'; pct.textContent=Math.round(p)+'%';
+    if(p>=100){
+      setTimeout(()=>{
+        pl.classList.add('hidden');
+        document.body.classList.remove('loading');
+        setTimeout(()=>{
+          const proj=document.getElementById('projects');
+          if(proj) proj.scrollIntoView({behavior:'smooth',block:'start'});
+        },350);
+      },500);
+    }
+  },55);
+})();
+
+/* ── CURSOR ── */
+const cursor=document.getElementById('cursor');
+document.addEventListener('mousemove',e=>{cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px';});
+document.querySelectorAll('a,button,.img-card,.service-item,.creative-skill-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cursor.classList.add('expand'));
+  el.addEventListener('mouseleave',()=>cursor.classList.remove('expand'));
+});
+
+/* ── TERMINAL TYPING ── */
+function typeText(el,text,cb,speed=55){
+  let i=0; const iv=setInterval(()=>{el.textContent+=text[i++]; if(i>=text.length){clearInterval(iv);if(cb)cb();}},speed);
+}
+setTimeout(()=>{
+  const cmd1=document.getElementById('cmd1'),out1=document.getElementById('out1'),
+        line2=document.getElementById('line2'),cmd2=document.getElementById('cmd2'),
+        out2=document.getElementById('out2'),line3=document.getElementById('line3'),
+        cmd3=document.getElementById('cmd3'),out3=document.getElementById('out3');
+  typeText(cmd1,'whoami',()=>{
+    out1.style.display='block';
+    setTimeout(()=>{ line2.style.display='block';
+      typeText(cmd2,'cat role.txt',()=>{
+        out2.style.display='block';
+        setTimeout(()=>{ line3.style.display='block';
+          typeText(cmd3,'./experience.sh',()=>{ out3.style.display='block'; });
+        },400);
+      });
+    },400);
+  });
+},2800);
+
+/* ── 3D REVEAL ── */
+const revObs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.1});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>revObs.observe(el));
+
+/* ── SKILL BARS ── */
+const barObs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      setTimeout(()=>{ e.target.style.width=e.target.getAttribute('data-width')+'%'; },200);
+      barObs.unobserve(e.target);
+    }
+  });
+},{threshold:0.5});
+document.querySelectorAll('.skill-bar,.cskill-bar').forEach(b=>barObs.observe(b));
+
+/* ── PARALLAX ── */
+let ticking=false;
+window.addEventListener('scroll',()=>{
+  if(!ticking){
+    requestAnimationFrame(()=>{
+      const sy=window.scrollY;
+      const hc=document.querySelector('#hero .hero-content');
+      const ht=document.querySelector('#hero .hero-terminal');
+      if(hc) hc.style.transform=`translateY(${sy*.22}px)`;
+      if(ht) ht.style.transform=`perspective(1000px) rotateY(${-8+sy*.005}deg) rotateX(${4-sy*.002}deg) translateY(${sy*.12}px)`;
+      ticking=false;
+    });
+    ticking=true;
+  }
+});
+
+/* ── 3D TILT ── */
+document.querySelectorAll('.img-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=((e.clientX-r.left)/r.width-.5)*12;
+    const y=((e.clientY-r.top)/r.height-.5)*-12;
+    card.style.transform=`perspective(800px) rotateX(${y}deg) rotateY(${x}deg)`;
+  });
+  card.addEventListener('mouseleave',()=>{ card.style.transform=''; });
+});
+
+/* ── NAV ACTIVE ── */
+const navLinks=document.querySelectorAll('.nav-links a');
+document.querySelectorAll('section[id]').forEach(s=>{
+  new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting) navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));
+    });
+  },{threshold:0.35}).observe(s);
+});
+
+/* ── FORM ── */
+document.querySelector('.btn-submit').addEventListener('click',()=>{
+  alert('Cảm ơn bạn đã liên hệ! Tôi sẽ phản hồi trong 24 giờ.\n☎ 0703 098 480 | Zalo: 0703 098 480');
+});
+</script>
+</body>
+</html>
