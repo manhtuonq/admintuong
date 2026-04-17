@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kho Website — Dự Án Website Của Manh Tuong</title>
+  <meta property="og:title" content="Kho Website — Dự Án Website Của Manh Tuong">
+  <meta property="og:description" content="Toàn bộ dự án website đã thực hiện — từ landing page, eCommerce đến hệ thống booking cao cấp tại Phan Thiết.">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,700;0,900;1,900&family=Barlow:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0e0e0e; --bg2: #161616; --surface: #1e1e1e;
+      --text: #ffffff; --text-muted: #f2f2f2; --accent: #aaff00;
+      --accent-dim: rgba(170,255,0,0.12); --border: #2a2a2a;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Barlow', sans-serif; font-weight: 300; overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+    /* ── CURSOR ── */
+    #cursor { position: fixed; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width .3s, height .3s, opacity .3s; }
+    #cursor.expand { width: 40px; height: 40px; opacity: .3; }
+
+    /* ── NAV ── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 3rem; background: rgba(14,14,14,.95); backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.1rem; letter-spacing: .1em; color: var(--text); text-decoration: none; display: flex; flex-direction: column; line-height: 1; }
+    .nav-logo span { color: var(--accent); font-size: .52rem; letter-spacing: .25em; margin-bottom: 2px; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-family: 'Barlow Condensed', sans-serif; font-size: .72rem; letter-spacing: .14em; color: var(--text-muted); text-decoration: none; transition: color .25s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+    .nav-cta { background: var(--accent); color: #000; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .72rem; letter-spacing: .14em; padding: .6rem 1.3rem; border: none; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: .4rem; transition: opacity .2s; }
+    .nav-cta:hover { opacity: .82; }
+    .nav-back { display: inline-flex; align-items: center; gap: .5rem; color: var(--text-muted); font-family: 'Barlow Condensed', sans-serif; font-size: .72rem; letter-spacing: .14em; text-decoration: none; transition: color .2s; }
+    .nav-back:hover { color: var(--accent); }
+
+    /* ── SOCIAL SIDEBAR ── */
+    .social-sidebar { position: fixed; right: 1.5rem; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: .7rem; z-index: 50; }
+    .social-sidebar a { width: 36px; height: 36px; border: 1px solid var(--border); display: grid; place-items: center; color: var(--text-muted); text-decoration: none; font-size: .95rem; transition: all .25s; }
+    .social-sidebar a:hover { border-color: var(--accent); color: var(--accent); }
+    .ss-zalo { font-family: 'Barlow Condensed', sans-serif !important; font-weight: 900 !important; font-size: .7rem !important; letter-spacing: -.01em; }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      min-height: 38vh; display: flex; align-items: flex-end;
+      padding: 8rem 3rem 3.5rem;
+      position: relative; overflow: hidden;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg2);
+    }
+    .page-hero-grid { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(170,255,0,.022) 1px, transparent 1px), linear-gradient(90deg, rgba(170,255,0,.022) 1px, transparent 1px); background-size: 60px 60px; }
+    .page-hero-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; pointer-events: none; background: radial-gradient(circle, rgba(170,255,0,.06) 0%, transparent 70%); top: -200px; right: -100px; }
+    .page-hero-inner { position: relative; z-index: 1; max-width: 1300px; margin: 0 auto; width: 100%; }
+    .page-hero-label { font-family: 'Barlow Condensed', sans-serif; font-size: .68rem; letter-spacing: .3em; color: var(--accent); display: flex; align-items: center; gap: .8rem; margin-bottom: .8rem; }
+    .page-hero-label::before { content: ''; display: block; width: 2rem; height: 1px; background: var(--accent); }
+    .page-hero-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(3rem, 8vw, 7rem); line-height: .9; letter-spacing: -.02em; }
+    .page-hero-title .outline { -webkit-text-stroke: 2px var(--accent); color: transparent; }
+    .page-hero-meta { margin-top: 1.4rem; display: flex; gap: 2.5rem; flex-wrap: wrap; }
+    .meta-item { display: flex; flex-direction: column; gap: .2rem; }
+    .meta-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.8rem; color: var(--accent); line-height: 1; }
+    .meta-lbl { font-size: .65rem; letter-spacing: .15em; color: var(--text-muted); }
+
+    /* ── MAIN LAYOUT ── */
+    .page-body { max-width: 1300px; margin: 0 auto; padding: 3rem 3rem 5rem; display: grid; grid-template-columns: 260px 1fr; gap: 3rem; align-items: start; }
+
+    /* ── FILTER SIDEBAR ── */
+    .filter-sidebar { position: sticky; top: 5.5rem; }
+    .filter-box { background: var(--surface); border: 1px solid var(--border); padding: 1.5rem; margin-bottom: 1.2rem; }
+    .filter-box-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .78rem; letter-spacing: .15em; color: var(--accent); margin-bottom: 1rem; padding-bottom: .6rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: .5rem; }
+    .filter-search { width: 100%; background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: .7rem .9rem; font-family: 'Barlow', sans-serif; font-size: .82rem; outline: none; transition: border-color .2s; border-radius: 0; }
+    .filter-search:focus { border-color: var(--accent); }
+    .filter-search::placeholder { color: var(--text-muted); }
+    .filter-options { display: flex; flex-direction: column; gap: .45rem; }
+    .filter-option { display: flex; align-items: center; gap: .6rem; cursor: pointer; padding: .35rem .5rem; border-radius: 3px; transition: background .15s; }
+    .filter-option:hover { background: var(--accent-dim); }
+    .filter-option input[type="checkbox"], .filter-option input[type="radio"] { appearance: none; width: 14px; height: 14px; border: 1px solid var(--border); border-radius: 2px; cursor: pointer; flex-shrink: 0; position: relative; transition: background .15s, border-color .15s; }
+    .filter-option input[type="radio"] { border-radius: 50%; }
+    .filter-option input:checked { background: var(--accent); border-color: var(--accent); }
+    .filter-option input:checked::after { content: '✓'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); color: #000; font-size: .62rem; font-weight: 700; }
+    .filter-option input[type="radio"]:checked::after { content: ''; width: 5px; height: 5px; background: #000; border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+    .filter-label { font-size: .78rem; color: var(--text-muted); transition: color .15s; flex: 1; }
+    .filter-option:hover .filter-label { color: var(--text); }
+    .filter-count { font-family: 'JetBrains Mono', monospace; font-size: .62rem; color: var(--text-muted); background: var(--bg); padding: .1rem .35rem; border-radius: 2px; }
+    .filter-price-range { display: flex; flex-direction: column; gap: .7rem; }
+    .price-input-row { display: flex; gap: .5rem; align-items: center; }
+    .price-input { flex: 1; background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: .5rem .7rem; font-family: 'JetBrains Mono', monospace; font-size: .73rem; outline: none; transition: border-color .2s; width: 100%; }
+    .price-input:focus { border-color: var(--accent); }
+    .price-sep { color: var(--text-muted); font-size: .75rem; }
+    .btn-filter-apply { width: 100%; padding: .7rem; background: var(--accent); color: #000; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .75rem; letter-spacing: .14em; border: none; cursor: pointer; transition: opacity .2s; margin-top: .5rem; }
+    .btn-filter-apply:hover { opacity: .85; }
+    .btn-filter-reset { width: 100%; padding: .55rem; background: transparent; color: var(--text-muted); font-family: 'Barlow Condensed', sans-serif; font-size: .72rem; letter-spacing: .1em; border: 1px solid var(--border); cursor: pointer; transition: border-color .2s, color .2s; }
+    .btn-filter-reset:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Mobile filter toggle */
+    .filter-toggle { display: none; }
+
+    /* ── PROJECT GRID AREA ── */
+    .grid-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: .8rem; }
+    .grid-result-count { font-family: 'JetBrains Mono', monospace; font-size: .75rem; color: var(--text-muted); }
+    .grid-result-count span { color: var(--accent); font-weight: 500; }
+    .grid-sort { background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: .5rem .9rem; font-family: 'Barlow Condensed', sans-serif; font-size: .75rem; letter-spacing: .08em; outline: none; cursor: pointer; }
+    .grid-sort option { background: var(--surface); }
+    .grid-view-btns { display: flex; gap: .35rem; }
+    .grid-view-btn { width: 34px; height: 34px; border: 1px solid var(--border); background: transparent; color: var(--text-muted); cursor: pointer; display: grid; place-items: center; font-size: .85rem; transition: all .2s; }
+    .grid-view-btn.active, .grid-view-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Active filters pills */
+    .active-filters { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1rem; }
+    .filter-pill { display: inline-flex; align-items: center; gap: .4rem; background: var(--accent-dim); border: 1px solid rgba(170,255,0,.3); color: var(--accent); font-family: 'Barlow Condensed', sans-serif; font-size: .68rem; letter-spacing: .1em; padding: .25rem .65rem; border-radius: 2px; }
+    .filter-pill button { background: none; border: none; color: var(--accent); cursor: pointer; font-size: .75rem; padding: 0; line-height: 1; }
+
+    /* ── PROJECT CARDS — grid mode ── */
+    .projects-area { }
+    #projectGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+    #projectGrid.list-view { grid-template-columns: 1fr; }
+
+    .proj-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; overflow: hidden;
+      transition: border-color .25s, box-shadow .25s, transform .25s;
+      cursor: pointer; position: relative;
+    }
+    .proj-card:hover { border-color: var(--accent); box-shadow: 0 16px 50px rgba(170,255,0,.13); transform: translateY(-3px); }
+
+    .proj-card-img { position: relative; overflow: hidden; aspect-ratio: 16/10; background: var(--bg); }
+    .proj-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; display: block; }
+    .proj-card:hover .proj-card-img img { transform: scale(1.05); }
+    .proj-card-badge {
+      position: absolute; top: .8rem; left: .8rem;
+      background: var(--accent); color: #000;
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: .6rem; letter-spacing: .12em; padding: .2rem .55rem; border-radius: 2px;
+    }
+    .proj-card-status {
+      position: absolute; top: .8rem; right: .8rem;
+      font-size: .6rem; letter-spacing: .1em; padding: .2rem .55rem; border-radius: 2px;
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    }
+    .status-live { background: rgba(0,200,80,.15); color: #00c850; border: 1px solid rgba(0,200,80,.3); }
+    .status-dev  { background: rgba(255,180,0,.12); color: #ffb400; border: 1px solid rgba(255,180,0,.3); }
+
+    .proj-card-body { padding: 1.2rem; }
+    .proj-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: .5rem; margin-bottom: .5rem; }
+    .proj-card-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.05rem; line-height: 1.2; flex: 1; }
+    .proj-card-price { font-family: 'JetBrains Mono', monospace; font-size: .72rem; color: var(--accent); white-space: nowrap; font-weight: 500; }
+    .proj-card-desc { font-size: .78rem; color: #fff; line-height: 1.6; margin-bottom: .9rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .proj-card-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: .9rem; }
+    .proj-tag { font-size: .62rem; padding: .18rem .5rem; background: var(--bg); color: #fff; border: 1px solid var(--border); border-radius: 2px; }
+    .proj-card-footer { display: flex; align-items: center; justify-content: space-between; padding-top: .7rem; border-top: 1px solid var(--border); }
+    .proj-card-date { font-family: 'JetBrains Mono', monospace; font-size: .65rem; color: var(--text-muted); }
+    .proj-card-date i { color: var(--accent); margin-right: .3rem; }
+    .proj-card-links { display: flex; gap: .45rem; }
+    .proj-link-btn {
+      width: 30px; height: 30px; border: 1px solid var(--border);
+      background: transparent; color: #fff;
+      display: grid; place-items: center; font-size: .8rem;
+      text-decoration: none; transition: all .2s; border-radius: 2px;
+    }
+    .proj-link-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* LIST VIEW override */
+    #projectGrid.list-view .proj-card { display: flex; flex-direction: row; }
+    #projectGrid.list-view .proj-card-img { flex: 0 0 220px; aspect-ratio: unset; min-height: 160px; }
+    #projectGrid.list-view .proj-card-body { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    #projectGrid.list-view .proj-card-desc { -webkit-line-clamp: 3; }
+
+    /* No results */
+    .no-results { text-align: center; padding: 5rem 2rem; color: #fff; }
+    .no-results i { font-size: 3rem; color: var(--border); margin-bottom: 1rem; display: block; }
+    .no-results p { font-size: .9rem; }
+
+    /* Pagination */
+    .pagination { display: flex; justify-content: center; gap: .5rem; margin-top: 3rem; flex-wrap: wrap; }
+    .page-btn { width: 38px; height: 38px; border: 1px solid var(--border); background: transparent; color: #fff; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .8rem; cursor: pointer; transition: all .2s; display: grid; place-items: center; }
+    .page-btn:hover, .page-btn.active { border-color: var(--accent); color: var(--accent); }
+    .page-btn.active { background: var(--accent); color: #000; }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); padding: 1.4rem 3rem; display: flex; align-items: center; justify-content: space-between; background: var(--bg2); flex-wrap: wrap; gap: 1rem; }
+    .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; letter-spacing: .08em; font-size: .9rem; }
+    .footer-copy { font-size: .7rem; color: var(--text-muted); }
+    .footer-socials { display: flex; gap: .6rem; }
+    .footer-socials a { width: 32px; height: 32px; border: 1px solid var(--border); display: grid; place-items: center; color: var(--text-muted); text-decoration: none; font-size: .85rem; transition: all .2s; }
+    .footer-socials a:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Noise overlay */
+    body::after { content:''; position:fixed; inset:0; pointer-events:none; z-index:1000; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); opacity:.18; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .page-body { grid-template-columns: 220px 1fr; gap: 2rem; }
+      #projectGrid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 900px) {
+      .page-body { grid-template-columns: 1fr; }
+      .filter-sidebar { position: static; }
+      .filter-sidebar-inner { display: none; }
+      .filter-sidebar-inner.open { display: block; }
+      .filter-toggle {
+        display: flex; align-items: center; justify-content: space-between;
+        width: 100%; padding: .9rem 1.2rem;
+        background: var(--surface); border: 1px solid var(--border);
+        color: var(--text); font-family: 'Barlow Condensed', sans-serif;
+        font-weight: 700; font-size: .8rem; letter-spacing: .1em;
+        cursor: pointer; margin-bottom: 1rem; transition: border-color .2s;
+      }
+      .filter-toggle:hover { border-color: var(--accent); color: var(--accent); }
+      .filter-toggle i { transition: transform .3s; }
+      .filter-toggle.open i { transform: rotate(180deg); }
+    }
+    @media (max-width: 820px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .page-body { padding: 2rem 1.5rem 4rem; }
+      .page-hero { padding: 7rem 1.5rem 2.5rem; }
+      .social-sidebar { display: none; }
+      footer { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 560px) {
+      #projectGrid { grid-template-columns: 1fr; }
+      #projectGrid.list-view .proj-card { flex-direction: column; }
+      #projectGrid.list-view .proj-card-img { flex: unset; aspect-ratio: 16/10; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="cursor"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span>● MANH TUONG · PHAN THIẾT, VN</span>
+    MANHTUONG.
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">GIỚI THIỆU</a></li>
+    <li><a href="index.html#services">DỊCH VỤ</a></li>
+    <li><a href="index.html#projects">DỰ ÁN TIKTOK</a></li>
+    <li><a href="duanweb.html" class="active">KHO WEBSITE</a></li>
+    <li><a href="index.html#community">CỘNG ĐỒNG</a></li>
+    <li><a href="index.html#contact">LIÊN HỆ</a></li>
+  </ul>
+  <a href="index.html#contact" class="nav-cta"><i class="fa-solid fa-paper-plane"></i> LIÊN HỆ NGAY</a>
+</nav>
+
+<!-- SOCIAL SIDEBAR -->
+<aside class="social-sidebar">
+  <a href="https://www.facebook.com/mahtuongs" target="_blank" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+  <a href="https://zalo.me/0703098480" target="_blank" title="Zalo" class="ss-zalo">Zl</a>
+  <a href="https://www.instagram.com" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+  <a href="https://github.com" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+  <a href="https://tiktok.com" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+</aside>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-glow"></div>
+  <div class="page-hero-inner">
+    <div class="page-hero-label">KHO DỰ ÁN</div>
+    <h1 class="page-hero-title">DỰ ÁN WEBSITE<br><span class="outline">CỦA TÔI</span></h1>
+    <div class="page-hero-meta">
+      <div class="meta-item">
+        <div class="meta-num" id="statTotal">0</div>
+        <div class="meta-lbl">TỔNG DỰ ÁN</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-num" id="statLive">0</div>
+        <div class="meta-lbl">ĐANG LIVE</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-num" id="statCats">0</div>
+        <div class="meta-lbl">DANH MỤC</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN BODY -->
+<div class="page-body">
+
+  <!-- FILTER SIDEBAR -->
+  <aside class="filter-sidebar">
+    <button class="filter-toggle" id="filterToggle">
+      <span><i class="fa-solid fa-sliders" style="margin-right:.5rem;color:var(--accent)"></i> LỌC DỰ ÁN</span>
+      <i class="fa-solid fa-chevron-down"></i>
+    </button>
+
+    <div class="filter-sidebar-inner" id="filterSidebarInner">
+
+      <!-- Search -->
+      <div class="filter-box">
+        <div class="filter-box-title"><i class="fa-solid fa-magnifying-glass"></i> TÌM KIẾM</div>
+        <input type="text" class="filter-search" id="filterSearch" placeholder="Nhập tên dự án...">
+      </div>
+
+      <!-- Category -->
+      <div class="filter-box">
+        <div class="filter-box-title"><i class="fa-solid fa-folder"></i> DANH MỤC</div>
+        <div class="filter-options" id="categoryOptions">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Price Range -->
+      <div class="filter-box">
+        <div class="filter-box-title"><i class="fa-solid fa-tag"></i> MỨC GIÁ</div>
+        <div class="filter-price-range">
+          <div class="filter-options" id="priceOptions">
+            <label class="filter-option"><input type="radio" name="priceRange" value="all" checked><span class="filter-label">Tất cả</span></label>
+            <label class="filter-option"><input type="radio" name="priceRange" value="0-3000000"><span class="filter-label">Dưới 3 triệu</span></label>
+            <label class="filter-option"><input type="radio" name="priceRange" value="3000000-7000000"><span class="filter-label">3 – 7 triệu</span></label>
+            <label class="filter-option"><input type="radio" name="priceRange" value="7000000-15000000"><span class="filter-label">7 – 15 triệu</span></label>
+            <label class="filter-option"><input type="radio" name="priceRange" value="15000000-999999999"><span class="filter-label">Trên 15 triệu</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sort by date -->
+      <div class="filter-box">
+        <div class="filter-box-title"><i class="fa-solid fa-calendar"></i> THỜI GIAN</div>
+        <div class="filter-options" id="dateOptions">
+          <label class="filter-option"><input type="radio" name="dateSort" value="newest" checked><span class="filter-label">Mới nhất</span></label>
+          <label class="filter-option"><input type="radio" name="dateSort" value="oldest"><span class="filter-label">Cũ nhất</span></label>
+        </div>
+      </div>
+
+      <!-- Status -->
+      <div class="filter-box">
+        <div class="filter-box-title"><i class="fa-solid fa-circle-dot"></i> TRẠNG THÁI</div>
+        <div class="filter-options" id="statusOptions">
+          <label class="filter-option"><input type="checkbox" value="live" checked><span class="filter-label">Đang live</span></label>
+          <label class="filter-option"><input type="checkbox" value="dev" checked><span class="filter-label">Đang phát triển</span></label>
+        </div>
+      </div>
+
+      <button class="btn-filter-reset" id="filterReset">↺ ĐẶT LẠI BỘ LỌC</button>
+    </div>
+  </aside>
+
+  <!-- PROJECT GRID AREA -->
+  <div class="projects-area">
+    <div class="grid-header">
+      <div class="grid-result-count">Hiển thị <span id="countDisplay">0</span> dự án</div>
+      <div style="display:flex;gap:.6rem;align-items:center;flex-wrap:wrap">
+        <select class="grid-sort" id="gridSort">
+          <option value="newest">Mới nhất</option>
+          <option value="oldest">Cũ nhất</option>
+          <option value="price-asc">Giá tăng dần</option>
+          <option value="price-desc">Giá giảm dần</option>
+          <option value="name-az">Tên A–Z</option>
+        </select>
+        <div class="grid-view-btns">
+          <button class="grid-view-btn active" id="btnGrid" title="Dạng lưới"><i class="fa-solid fa-grip"></i></button>
+          <button class="grid-view-btn" id="btnList" title="Dạng danh sách"><i class="fa-solid fa-list"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="active-filters" id="activeFilters"></div>
+
+    <div id="projectGrid">
+      <!-- Rendered by JS -->
+    </div>
+    <div class="no-results" id="noResults" style="display:none">
+      <i class="fa-regular fa-folder-open"></i>
+      <p>Không tìm thấy dự án phù hợp.<br><small>Thử điều chỉnh bộ lọc hoặc từ khoá tìm kiếm.</small></p>
+    </div>
+    <div class="pagination" id="pagination"></div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">MANHTUONG.</div>
+  <div class="footer-copy">© 2025 Ha Trong Manh Tuong · Phan Thiết, Bình Thuận · 0703 098 480</div>
+  <div class="footer-socials">
+    <a href="https://www.facebook.com/mahtuongs" target="_blank" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+    <a href="https://zalo.me/0703098480" target="_blank" title="Zalo" style="font-family:'Barlow Condensed';font-weight:900;font-size:.7rem">Zl</a>
+    <a href="https://www.instagram.com" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    <a href="https://github.com" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+    <a href="https://tiktok.com" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+  </div>
+</footer>
+
+<script>
+/* ════════════════════════════════════════════════════
+   DATABASE — Thêm dự án mới tại đây
+   Mỗi object là một dự án website.
+   Trường:
+     id          : số duy nhất (int)
+     title       : tên dự án (string)
+     category    : slug danh mục — khớp với categoryMap bên dưới
+     price       : giá (số, đơn vị VND)
+     date        : ngày bàn giao "YYYY-MM" (string)
+     image       : đường dẫn ảnh (string)
+     tags        : mảng công nghệ/tính năng (string[])
+     description : mô tả ngắn (string)
+     liveUrl     : link xem trực tiếp (string | "#")
+     repoUrl     : link github / figma (string | "#")
+     status      : "live" | "dev"
+════════════════════════════════════════════════════ */
+const WEBSITE_DB = [
+  {
+    id: 1,
+    title: "Website Du Lịch Phan Thiết",
+    category: "du-lich",
+    price: 6500000,
+    date: "2024-11",
+    image: "image/web_01.jpg",
+    tags: ["HTML/CSS", "JavaScript", "SEO", "Google Maps"],
+    description: "Landing page du lịch hiện đại, tối ưu SEO, tích hợp bản đồ Google Maps và hệ thống đặt tour online.",
+    liveUrl: "#",
+    repoUrl: "#",
+    status: "live"
+  },
+  {
+    id: 2,
+    title: "Website Quán Cà Phê Fika",
+    category: "fb",
+    price: 4200000,
+    date: "2024-09",
+    image: "image/caphefika.jpg",
+    tags: ["WordPress", "Elementor", "Booking", "SEO"],
+    description: "Giao diện chill ấn tượng cho quán cà phê, tích hợp đặt chỗ online, menu digital và kết nối mạng xã hội.",
+    liveUrl: "https://www.tiktok.com/@co.co.fika.coffee",
+    repoUrl: "#",
+    status: "live"
+  },
+  {
+    id: 3,
+    title: "Shop Online Đồng Hồ CoCo",
+    category: "ecommerce",
+    price: 12000000,
+    date: "2024-07",
+    image: "image/cocowatch.jpg",
+    tags: ["Next.js", "Stripe", "Tailwind", "PostgreSQL"],
+    description: "Cửa hàng thương mại điện tử đầy đủ với giỏ hàng, thanh toán online, quản lý đơn hàng và dashboard admin.",
+    liveUrl: "https://www.tiktok.com/@orderbycoco",
+    repoUrl: "#",
+    status: "live"
+  },
+  {
+    id: 4,
+    title: "Booking Resort Phan Thiết",
+    category: "resort",
+    price: 18000000,
+    date: "2024-06",
+    image: "image/web_04.jpg",
+    tags: ["React", "Node.js", "MongoDB", "Stripe", "Calendar"],
+    description: "Hệ thống đặt phòng resort trực tuyến với quản lý phòng, lịch đặt, xác nhận email tự động.",
+    liveUrl: "#",
+    repoUrl: "#",
+    status: "live"
+  },
+  {
+    id: 5,
+    title: "Portfolio Cá Nhân Creative",
+    category: "portfolio",
+    price: 3800000,
+    date: "2024-10",
+    image: "image/web_05.jpg",
+    tags: ["HTML/CSS", "GSAP", "Three.js", "Responsive"],
+    description: "Thiết kế portfolio sáng tạo với hiệu ứng 3D, animation mượt mà, tối ưu hiển thị công trình.",
+    liveUrl: "#",
+    repoUrl: "#",
+    status: "live"
+  },
+  {
+    id: 6,
+    title: "Website Marketing Agency",
+    category: "agency",
+    price: 9500000,
+    date: "2024-08",
+    image: "image/web_06.jpg",
+    tags: ["Vue.js", "Nuxt", "CRM", "Analytics", "SEO"],
+    description: "Giao diện chuyên nghiệp cho công ty marketing, tích hợp form liên hệ thông minh và CRM nhẹ.",
+    liveUrl: "#",
+    repoUrl: "#",
+    status: "live"
+  },
+  {
+    id: 7,
+    title: "Website Nhà Hàng Hải Sản",
+    category: "fb",
+    price: 5500000,
+    date: "2024-05",
+    image: "image/web_07.jpg",
+    tags: ["WordPress", "WooCommerce", "QR Menu", "Responsive"],
+    description: "Menu online tương tác, đặt bàn và thực đơn đầy đủ với mã QR cho nhà hàng hải sản cao cấp.",
+    liveUrl: "#",
+    repoUrl: "#",
+    status: "live"
+  },
+  {
+    id: 8,
+    title: "Blog Chia Sẻ Kiến Thức",
+    category: "blog",
+    price: 2800000,
+    date: "2024-03",
+    image: "image/KHcaphe.jpg",
+    tags: ["WordPress", "SEO", "Elementor", "Newsletter"],
+    description: "Nền tảng blog hiện đại với hệ thống quản lý nội dung dễ dùng, phân loại bài và newsletter tự động.",
+    liveUrl: "https://www.tiktok.com/@khcoffee1",
+    repoUrl: "#",
+    status: "live"
+  },
+  {
+    id: 9,
+    title: "App Du Lịch Suối La Ngâu",
+    category: "du-lich",
+    price: 7000000,
+    date: "2025-01",
+    image: "image/suoilangau.jpg",
+    tags: ["React Native", "Maps", "PWA", "Offline"],
+    description: "Ứng dụng web du lịch với bản đồ tương tác, guide audio và hệ thống review của khách.",
+    liveUrl: "https://www.tiktok.com/@sui.la.ngu.phm.on",
+    repoUrl: "#",
+    status: "live"
+  },
+  {
+    id: 10,
+    title: "Hệ Thống Quản Lý Homestay",
+    category: "resort",
+    price: 22000000,
+    date: "2025-02",
+    image: "image/web_04.jpg",
+    tags: ["React", "Express", "MySQL", "Dashboard", "Realtime"],
+    description: "Dashboard quản lý homestay toàn diện: phòng, khách, doanh thu, báo cáo realtime, tích hợp Channel Manager.",
+    liveUrl: "#",
+    repoUrl: "#",
+    status: "dev"
+  },
+  {
+    id: 11,
+    title: "Cổng Thông Tin Bình Thuận",
+    category: "du-lich",
+    price: 35000000,
+    date: "2025-03",
+    image: "image/gr_01.jpg",
+    tags: ["Next.js", "Headless CMS", "i18n", "SEO", "Analytics"],
+    description: "Cổng thông tin du lịch đa ngôn ngữ (Việt, Anh, Hàn) giới thiệu điểm đến Bình Thuận cho khách quốc tế.",
+    liveUrl: "#",
+    repoUrl: "#",
+    status: "dev"
+  },
+  {
+    id: 12,
+    title: "Landing Page Khoá Học TikTok",
+    category: "landing",
+    price: 2200000,
+    date: "2024-12",
+    image: "image/web_02.jpg",
+    tags: ["HTML/CSS", "Animista", "Conversion", "FB Pixel"],
+    description: "Landing page tỉ lệ chuyển đổi cao cho khoá học xây dựng kênh TikTok, tích hợp FB Pixel và Google Tag.",
+    liveUrl: "#",
+    repoUrl: "#",
+    status: "live"
+  }
+];
+
+/* ── Category map (thêm danh mục mới tại đây) ── */
+const CATEGORY_MAP = {
+  "du-lich"  : { label: "Du Lịch",       icon: "fa-map-location-dot" },
+  "fb"       : { label: "F&B (Cafe / Nhà Hàng)", icon: "fa-mug-hot" },
+  "ecommerce": { label: "Thương Mại Điện Tử", icon: "fa-cart-shopping" },
+  "resort"   : { label: "Resort & Hotel", icon: "fa-hotel" },
+  "portfolio": { label: "Portfolio",      icon: "fa-user-tie" },
+  "agency"   : { label: "Agency",         icon: "fa-briefcase" },
+  "blog"     : { label: "Blog / CMS",     icon: "fa-newspaper" },
+  "landing"  : { label: "Landing Page",   icon: "fa-rectangle-ad" }
+};
+
+/* ════════════════════════════════════════════════════
+   APP LOGIC
+════════════════════════════════════════════════════ */
+const ITEMS_PER_PAGE = 9;
+let currentPage = 1;
+let filtered = [];
+
+/* Format price */
+function fmtPrice(p) {
+  if (p >= 1000000) return (p / 1000000).toFixed(p % 1000000 === 0 ? 0 : 1) + ' triệu';
+  return p.toLocaleString('vi-VN') + 'đ';
+}
+/* Format date */
+function fmtDate(d) {
+  const [y, m] = d.split('-');
+  return `${m}/${y}`;
+}
+
+/* Build category filter */
+function buildCategoryFilter() {
+  const container = document.getElementById('categoryOptions');
+  const cats = Object.keys(CATEGORY_MAP);
+  // All option
+  const allDiv = document.createElement('label');
+  allDiv.className = 'filter-option';
+  allDiv.innerHTML = `<input type="checkbox" value="all" checked><span class="filter-label">Tất cả danh mục</span>`;
+  container.appendChild(allDiv);
+  cats.forEach(cat => {
+    const count = WEBSITE_DB.filter(p => p.category === cat).length;
+    const div = document.createElement('label');
+    div.className = 'filter-option';
+    div.innerHTML = `<input type="checkbox" value="${cat}"><span class="filter-label"><i class="fa-solid ${CATEGORY_MAP[cat].icon}" style="width:14px;margin-right:.3rem;color:var(--accent);font-size:.7rem"></i>${CATEGORY_MAP[cat].label}</span><span class="filter-count">${count}</span>`;
+    container.appendChild(div);
+  });
+
+  // All toggle logic
+  const allInput = allDiv.querySelector('input');
+  allInput.addEventListener('change', () => {
+    if (allInput.checked) {
+      container.querySelectorAll('input:not([value="all"])').forEach(i => i.checked = false);
+    }
+    applyFilters();
+  });
+  container.querySelectorAll('input:not([value="all"])').forEach(i => {
+    i.addEventListener('change', () => {
+      allInput.checked = false;
+      applyFilters();
+    });
+  });
+}
+
+/* Get active filters */
+function getFilters() {
+  const search = document.getElementById('filterSearch').value.trim().toLowerCase();
+  const catInputs = document.querySelectorAll('#categoryOptions input:checked');
+  const cats = Array.from(catInputs).map(i => i.value);
+  const priceVal = document.querySelector('input[name="priceRange"]:checked')?.value || 'all';
+  const dateSort = document.querySelector('input[name="dateSort"]:checked')?.value || 'newest';
+  const statusInputs = document.querySelectorAll('#statusOptions input:checked');
+  const statuses = Array.from(statusInputs).map(i => i.value);
+  const sortSel = document.getElementById('gridSort')?.value || 'newest';
+  return { search, cats, priceVal, dateSort, statuses, sortSel };
+}
+
+/* Apply filters & render */
+function applyFilters() {
+  const { search, cats, priceVal, dateSort, statuses, sortSel } = getFilters();
+
+  filtered = WEBSITE_DB.filter(p => {
+    // Search
+    if (search && !p.title.toLowerCase().includes(search) && !p.description.toLowerCase().includes(search) && !p.tags.some(t => t.toLowerCase().includes(search))) return false;
+    // Category
+    if (!cats.includes('all') && cats.length > 0 && !cats.includes(p.category)) return false;
+    // Price
+    if (priceVal !== 'all') {
+      const [mn, mx] = priceVal.split('-').map(Number);
+      if (p.price < mn || p.price > mx) return false;
+    }
+    // Status
+    if (statuses.length > 0 && !statuses.includes(p.status)) return false;
+    return true;
+  });
+
+  // Sort
+  filtered.sort((a, b) => {
+    switch (sortSel) {
+      case 'oldest':    return a.date.localeCompare(b.date);
+      case 'price-asc': return a.price - b.price;
+      case 'price-desc':return b.price - a.price;
+      case 'name-az':   return a.title.localeCompare(b.title);
+      default:          return b.date.localeCompare(a.date);
+    }
+  });
+
+  currentPage = 1;
+  renderGrid();
+  renderPagination();
+  updateStats();
+  renderActiveFilters();
+}
+
+/* Render project cards */
+function renderGrid() {
+  const grid = document.getElementById('projectGrid');
+  const noRes = document.getElementById('noResults');
+  const countDisplay = document.getElementById('countDisplay');
+
+  const start = (currentPage - 1) * ITEMS_PER_PAGE;
+  const slice = filtered.slice(start, start + ITEMS_PER_PAGE);
+
+  countDisplay.textContent = filtered.length;
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '';
+    noRes.style.display = 'block';
+    return;
+  }
+  noRes.style.display = 'none';
+
+  grid.innerHTML = slice.map(p => {
+    const cat = CATEGORY_MAP[p.category] || { label: p.category, icon: 'fa-globe' };
+    const fallbackImg = `https://picsum.photos/seed/${p.id}/640/400`;
+    return `
+    <div class="proj-card" id="proj-${p.id}">
+      <div class="proj-card-img">
+        <img src="${p.image}" onerror="this.src='${fallbackImg}'" alt="${p.title}" loading="lazy">
+        <span class="proj-card-badge"><i class="fa-solid ${cat.icon}" style="margin-right:.3rem"></i>${cat.label}</span>
+        <span class="proj-card-status ${p.status === 'live' ? 'status-live' : 'status-dev'}">
+          ${p.status === 'live' ? '● LIVE' : '◐ DEV'}
+        </span>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-card-top">
+          <div class="proj-card-title">${p.title}</div>
+          <div class="proj-card-price">${fmtPrice(p.price)}</div>
+        </div>
+        <div class="proj-card-desc">${p.description}</div>
+        <div class="proj-card-tags">${p.tags.map(t => `<span class="proj-tag">${t}</span>`).join('')}</div>
+        <div class="proj-card-footer">
+          <div class="proj-card-date"><i class="fa-regular fa-calendar"></i>${fmtDate(p.date)}</div>
+          <div class="proj-card-links">
+            ${p.liveUrl !== '#' ? `<a href="${p.liveUrl}" target="_blank" class="proj-link-btn" title="Xem live"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>` : ''}
+            ${p.repoUrl !== '#' ? `<a href="${p.repoUrl}" target="_blank" class="proj-link-btn" title="Code / Figma"><i class="fa-brands fa-github"></i></a>` : ''}
+            <button class="proj-link-btn" title="Sao chép link" onclick="navigator.clipboard.writeText(window.location.origin+'/duanweb.html#proj-${p.id}');this.innerHTML='<i class=\'fa-solid fa-check\'></i>';setTimeout(()=>this.innerHTML='<i class=\'fa-solid fa-link\'></i>',2000)"><i class="fa-solid fa-link"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Cursor expand
+  grid.querySelectorAll('.proj-card').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
+  });
+}
+
+/* Render pagination */
+function renderPagination() {
+  const pages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+  const pg = document.getElementById('pagination');
+  if (pages <= 1) { pg.innerHTML = ''; return; }
+  let html = '';
+  if (currentPage > 1) html += `<button class="page-btn" onclick="goPage(${currentPage-1})"><i class="fa-solid fa-chevron-left"></i></button>`;
+  for (let i = 1; i <= pages; i++) {
+    if (i === 1 || i === pages || Math.abs(i - currentPage) <= 1) {
+      html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="goPage(${i})">${i}</button>`;
+    } else if (Math.abs(i - currentPage) === 2) {
+      html += `<button class="page-btn" style="pointer-events:none">…</button>`;
+    }
+  }
+  if (currentPage < pages) html += `<button class="page-btn" onclick="goPage(${currentPage+1})"><i class="fa-solid fa-chevron-right"></i></button>`;
+  pg.innerHTML = html;
+}
+function goPage(n) {
+  currentPage = n;
+  renderGrid();
+  renderPagination();
+  document.querySelector('.page-body').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* Update hero stats */
+function updateStats() {
+  const total = WEBSITE_DB.length;
+  const live  = WEBSITE_DB.filter(p => p.status === 'live').length;
+  const cats  = new Set(WEBSITE_DB.map(p => p.category)).size;
+  animateNum('statTotal', total);
+  animateNum('statLive', live);
+  animateNum('statCats', cats);
+}
+function animateNum(id, target) {
+  const el = document.getElementById(id);
+  let n = 0; const step = Math.ceil(target / 30);
+  const iv = setInterval(() => {
+    n = Math.min(n + step, target);
+    el.textContent = n;
+    if (n >= target) clearInterval(iv);
+  }, 30);
+}
+
+/* Active filter pills */
+function renderActiveFilters() {
+  const { search, cats, priceVal, statuses } = getFilters();
+  const container = document.getElementById('activeFilters');
+  let pills = '';
+  if (search) pills += `<span class="filter-pill">🔍 ${search} <button onclick="document.getElementById('filterSearch').value='';applyFilters()">×</button></span>`;
+  if (!cats.includes('all') && cats.length > 0) {
+    cats.forEach(c => {
+      const label = CATEGORY_MAP[c]?.label || c;
+      pills += `<span class="filter-pill">📁 ${label} <button onclick="removeCategory('${c}')">×</button></span>`;
+    });
+  }
+  if (priceVal !== 'all') pills += `<span class="filter-pill">💰 Lọc giá <button onclick="document.querySelector('[name=priceRange][value=all]').checked=true;applyFilters()">×</button></span>`;
+  container.innerHTML = pills;
+}
+function removeCategory(cat) {
+  const input = document.querySelector(`#categoryOptions input[value="${cat}"]`);
+  if (input) { input.checked = false; }
+  const remaining = Array.from(document.querySelectorAll('#categoryOptions input:not([value="all"]):checked'));
+  if (remaining.length === 0) document.querySelector('#categoryOptions input[value="all"]').checked = true;
+  applyFilters();
+}
+
+/* ── INIT ── */
+document.addEventListener('DOMContentLoaded', () => {
+  buildCategoryFilter();
+
+  // Listeners
+  document.getElementById('filterSearch').addEventListener('input', debounce(applyFilters, 280));
+  document.querySelectorAll('input[name="priceRange"], input[name="dateSort"]').forEach(i => i.addEventListener('change', applyFilters));
+  document.querySelectorAll('#statusOptions input').forEach(i => i.addEventListener('change', applyFilters));
+  document.getElementById('gridSort').addEventListener('change', applyFilters);
+  document.getElementById('filterReset').addEventListener('click', () => {
+    document.getElementById('filterSearch').value = '';
+    document.querySelector('#categoryOptions input[value="all"]').checked = true;
+    document.querySelectorAll('#categoryOptions input:not([value="all"])').forEach(i => i.checked = false);
+    document.querySelector('input[name="priceRange"][value="all"]').checked = true;
+    document.querySelector('input[name="dateSort"][value="newest"]').checked = true;
+    document.querySelectorAll('#statusOptions input').forEach(i => i.checked = true);
+    document.getElementById('gridSort').value = 'newest';
+    applyFilters();
+  });
+
+  // View toggle
+  document.getElementById('btnGrid').addEventListener('click', () => {
+    document.getElementById('projectGrid').classList.remove('list-view');
+    document.getElementById('btnGrid').classList.add('active');
+    document.getElementById('btnList').classList.remove('active');
+  });
+  document.getElementById('btnList').addEventListener('click', () => {
+    document.getElementById('projectGrid').classList.add('list-view');
+    document.getElementById('btnList').classList.add('active');
+    document.getElementById('btnGrid').classList.remove('active');
+  });
+
+  // Mobile filter toggle
+  const toggle = document.getElementById('filterToggle');
+  const inner  = document.getElementById('filterSidebarInner');
+  toggle.addEventListener('click', () => {
+    const open = inner.classList.toggle('open');
+    toggle.classList.toggle('open', open);
+  });
+
+  applyFilters();
+
+  // Scroll to anchor if needed
+  const hash = window.location.hash;
+  if (hash) setTimeout(() => {
+    const el = document.querySelector(hash);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 400);
+});
+
+function debounce(fn, ms) { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; }
+
+/* ── CURSOR ── */
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => { cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; });
+document.querySelectorAll('a, button, .proj-card').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
+});
+</script>
+</body>
+</html>

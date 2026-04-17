@@ -22,7 +22,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --bg: #0e0e0e; --bg2: #161616; --surface: #1e1e1e;
-      --text: #f0ede8; --text-muted: #888; --accent: #aaff00;
+      --text: #ffffff; --text-muted: #f2f2f2; --accent: #aaff00;
       --accent-dim: rgba(170,255,0,0.12); --border: #2a2a2a; --terminal-bg: #111;
     }
     html { scroll-behavior: smooth; }
@@ -85,7 +85,7 @@
     .hero-name-solid { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(5rem, 13vw, 13rem); line-height: .9; letter-spacing: -.02em; color: var(--text); }
     .hero-name-outline { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(5rem, 13vw, 13rem); line-height: .9; letter-spacing: -.02em; -webkit-text-stroke: 2px var(--accent); color: transparent; }
     .hero-role { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: clamp(1rem, 2vw, 1.6rem); color: var(--accent); margin: 1.5rem 0 1rem; letter-spacing: .03em; line-height: 1.25; }
-    .hero-desc { max-width: 480px; line-height: 1.75; color: #aaa; font-size: .92rem; margin-bottom: 2.5rem; }
+    .hero-desc { max-width: 480px; line-height: 1.75; color: #fff; font-size: .92rem; margin-bottom: 2.5rem; }
     .hero-btns { display: flex; gap: 1.2rem; flex-wrap: wrap; }
     .btn-primary { background: var(--accent); color: #000; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .78rem; letter-spacing: .14em; padding: .85rem 2rem; border: none; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: .6rem; transition: transform .2s, box-shadow .2s; }
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(170,255,0,.28); }
@@ -98,9 +98,9 @@
     .terminal-bar { background: #1c1c1c; padding: .7rem 1rem; display: flex; align-items: center; gap: .5rem; border-bottom: 1px solid #2a2a2a; }
     .terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
     .td-red{background:#ff5f57}.td-yellow{background:#ffbd2e}.td-green{background:#28c840}
-    .terminal-title { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: .63rem; color: #555; }
+    .terminal-title { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: .63rem; color: #f2f2f2; }
     .terminal-body { padding: 1.2rem 1.4rem; font-family: 'JetBrains Mono', monospace; font-size: .76rem; line-height: 2; }
-    .t-prompt{color:#555}.t-cmd{color:var(--text)}.t-output{color:#aaa}.t-green{color:var(--accent)}
+    .t-prompt{color:#f2f2f2}.t-cmd{color:var(--text)}.t-output{color:#fff}.t-green{color:var(--accent)}
     .t-cursor { display: inline-block; width: 8px; height: 1em; background: var(--accent); vertical-align: middle; animation: blink 1s infinite; }
     @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
 
@@ -130,13 +130,13 @@
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
     .about-photo-placeholder { width: 100%; aspect-ratio: 4/5; background: var(--surface); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: 2rem; position: relative; overflow: hidden; border: 1px solid var(--border); }
     .about-photo-placeholder::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(14,14,14,.92) 0%, rgba(14,14,14,.2) 50%, transparent 100%); }
-    .ap-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .4; }
+    .ap-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 1.4; }
     .about-name-overlay { position: relative; z-index: 1; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.8rem; line-height: 1; }
     .about-role-overlay { position: relative; z-index: 1; font-family: 'Barlow Condensed', sans-serif; font-size: .72rem; letter-spacing: .18em; color: var(--accent); display: flex; align-items: center; gap: .5rem; margin-top: .4rem; }
     .stat-badge { position: absolute; top: 1.5rem; right: -1.5rem; background: var(--bg); border: 1px solid var(--border); padding: 1rem 1.4rem; border-radius: 4px; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
     .stat-badge .num { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 2.5rem; color: var(--accent); line-height: 1; }
     .stat-badge .lbl { font-size: .68rem; letter-spacing: .1em; color: var(--text-muted); text-transform: uppercase; }
-    .about-desc { font-size: .97rem; line-height: 1.8; color: #bbb; margin: 1.5rem 0; }
+    .about-desc { font-size: .97rem; line-height: 1.8; color: #fff; margin: 1.5rem 0; }
     .about-desc strong { color: var(--text); font-weight: 600; }
     .skill-tags { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.5rem; }
     .tag { border: 1px solid var(--border); padding: .4rem .9rem; font-size: .73rem; color: var(--text-muted); display: flex; align-items: center; gap: .5rem; transition: all .2s; }
@@ -170,7 +170,7 @@
     .img-card-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.25rem; }
     .img-card-tag { font-size: .61rem; letter-spacing: .2em; color: var(--accent); margin-bottom: .3rem; font-family: 'Barlow Condensed', sans-serif; }
     .img-card-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.02rem; line-height: 1.2; margin-bottom: .3rem; }
-    .img-card-desc { font-size: .73rem; color: #aaa; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: .65rem; }
+    .img-card-desc { font-size: .73rem; color: #fff; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: .65rem; }
     .img-card-stack { display: flex; gap: .3rem; flex-wrap: wrap; margin-bottom: .6rem; }
     .stack-pill { font-size: .61rem; padding: .15rem .5rem; background: var(--accent-dim); color: var(--accent); border-radius: 2px; }
     .img-card-btn { display: inline-flex; align-items: center; gap: .4rem; background: var(--accent); color: #000; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .67rem; letter-spacing: .12em; padding: .42rem .88rem; text-decoration: none; opacity: 0; transform: translateY(10px); transition: opacity .35s ease, transform .35s ease; }
@@ -301,6 +301,108 @@
       }
       .scroll-hint::after { content: '→'; color: var(--accent); }
     }
+
+    /* ══ WEB PROJECTS — Arc Rainbow Carousel ══ */
+    #web-projects { background: var(--bg2); }
+    .web-projects-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 1.5rem; flex-wrap: wrap; margin-bottom: 0;
+    }
+    .btn-view-all {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: transparent; color: var(--accent);
+      border: 1px solid var(--accent);
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: .72rem; letter-spacing: .14em;
+      padding: .6rem 1.4rem; text-decoration: none; flex-shrink: 0;
+      transition: background .2s, color .2s;
+    }
+    .btn-view-all:hover { background: var(--accent); color: #000; }
+
+    /* Arc Carousel Wrapper */
+    .arc-carousel-outer {
+      position: relative; margin-top: 3rem;
+      padding-bottom: 5rem; /* space for arc drop */
+    }
+    /* Fade edges */
+    .arc-carousel-outer::before,
+    .arc-carousel-outer::after { content: none; }
+
+    .arc-carousel-viewport {
+      overflow: hidden; cursor: grab; position: relative;
+      padding: 1rem 0;
+    }
+    .arc-carousel-viewport:active { cursor: grabbing; }
+    .arc-carousel-viewport.is-paused { cursor: default; }
+
+    .arc-carousel-track {
+      display: flex; gap: 1.6rem;
+      width: max-content;
+      padding: 0 5vw 0 5vw;
+      will-change: transform;
+      transition: none;
+    }
+
+    /* Web Project Card */
+    .web-card {
+      flex: 0 0 230px; width: 230px;
+      position: relative; border-radius: 14px; overflow: hidden;
+      border: 1px solid var(--border); background: var(--surface);
+      aspect-ratio: 3/4.4;
+      transform-origin: bottom center;
+      will-change: transform;
+      transition: border-color .3s, box-shadow .3s;
+    }
+    .web-card:hover { border-color: var(--accent); box-shadow: 0 24px 60px rgba(170,255,0,.18); }
+    .web-card img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .6s ease;
+    }
+    .web-card:hover img { transform: scale(1.06); }
+    .web-card-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.94) 0%, rgba(0,0,0,.35) 50%, transparent 100%);
+      transition: background .4s;
+    }
+    .web-card:hover .web-card-overlay {
+      background: linear-gradient(to top, rgba(0,0,0,.97) 0%, rgba(0,0,0,.52) 60%, rgba(0,0,0,.08) 100%);
+    }
+    .web-card-content {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 1.1rem 1rem;
+    }
+    .web-card-tag  { font-size: .59rem; letter-spacing: .2em; color: var(--accent); margin-bottom: .25rem; font-family: 'Barlow Condensed', sans-serif; }
+    .web-card-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .95rem; line-height: 1.2; margin-bottom: .25rem; }
+    .web-card-desc  { font-size: .7rem; color: #fff; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: .6rem; }
+    .web-card-btn {
+      display: inline-flex; align-items: center; gap: .35rem;
+      background: var(--accent); color: #000;
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: .64rem; letter-spacing: .12em; padding: .38rem .8rem;
+      text-decoration: none; border-radius: 2px;
+      opacity: 0; transform: translateY(8px);
+      transition: opacity .3s, transform .3s, background .2s;
+    }
+    .web-card:hover .web-card-btn { opacity: 1; transform: translateY(0); }
+    .web-card-btn:hover { background: #ccff33; }
+
+    /* Arc carousel dots / drag hint */
+    .arc-hint {
+      text-align: center; margin-top: .8rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .62rem; letter-spacing: .2em; color: var(--text-muted);
+    }
+    .arc-hint span { color: var(--accent); }
+
+    @media (max-width: 820px) {
+      .web-card { flex: 0 0 185px; width: 185px; }
+      .arc-carousel-outer::before, .arc-carousel-outer::after { content: none; }
+    }
+    @media (max-width: 480px) {
+      .web-card { flex: 0 0 155px; width: 155px; }
+      .arc-carousel-outer::before, .arc-carousel-outer::after { content: none; }
+      .web-projects-header { flex-direction: column; align-items: flex-start; }
+    }
   </style>
 </head>
 <body class="loading">
@@ -327,6 +429,7 @@
     <li><a href="#about">GIỚI THIỆU</a></li>
     <li><a href="#services">DỊCH VỤ</a></li>
     <li><a href="#projects">DỰ ÁN</a></li>
+    <li><a href="#web-projects">KHO WEBSITE</a></li>
     <li><a href="#community">CỘNG ĐỒNG</a></li>
     <li><a href="#skills">KỸ NĂNG</a></li>
     <li><a href="#contact">LIÊN HỆ</a></li>
@@ -433,7 +536,7 @@
 <section id="projects">
   <div class="section-inner">
     <div class="section-label reveal">PORTFOLIO</div>
-    <h2 class="section-heading reveal d1">DỰ ÁN - Phan Thiết<br><span class="outline">CỦA TÔI</span></h2>
+    <h2 class="section-heading reveal d1">DỰ ÁN TIKTOK - Phan Thiết<br><span class="outline">CỦA TÔI</span></h2>
     <div class="projects-grid">
 
       <div class="img-card reveal d1">
@@ -486,6 +589,116 @@
 
     </div>
     <div class="scroll-hint">VUỐT ĐỂ XEM THÊM</div>
+  </div>
+</section>
+
+<!-- ══ WEB PROJECTS — Arc Rainbow Carousel ══ -->
+<section id="web-projects">
+  <div class="section-inner">
+    <div class="web-projects-header reveal">
+      <div>
+        <div class="section-label">KHO WEBSITE</div>
+        <h2 class="section-heading">DỰ ÁN WEBSITE <br><span class="outline">CỦA TÔI</span></h2>
+      </div>
+      <a href="duanweb.html" class="btn-view-all"><i class="fa-solid fa-globe"></i> XEM TẤT CẢ</a>
+    </div>
+
+    <div class="arc-carousel-outer">
+      <div class="arc-carousel-viewport" id="arcViewport">
+        <div class="arc-carousel-track" id="arcTrack">
+
+          <div class="web-card">
+            <img src="image/web_01.jpg" onerror="this.src='https://picsum.photos/seed/w1/400/533'" alt="Website Du Lịch" loading="lazy">
+            <div class="web-card-overlay"></div>
+            <div class="web-card-content">
+              <div class="web-card-tag">DU LỊCH</div>
+              <div class="web-card-title">Website Du Lịch Phan Thiết</div>
+              <div class="web-card-desc">Landing page du lịch hiện đại, tích hợp SEO và bản đồ Google Maps.</div>
+              <a href="duanweb.html" class="web-card-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> XEM CHI TIẾT</a>
+            </div>
+          </div>
+
+          <div class="web-card">
+            <img src="image/web_02.jpg" onerror="this.src='https://picsum.photos/seed/w2/400/533'" alt="Website Cafe" loading="lazy">
+            <div class="web-card-overlay"></div>
+            <div class="web-card-content">
+              <div class="web-card-tag">F&amp;B</div>
+              <div class="web-card-title">Website Quán Cà Phê Fika</div>
+              <div class="web-card-desc">Giao diện chill, tối ưu đặt chỗ online và kết nối mạng xã hội.</div>
+              <a href="duanweb.html" class="web-card-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> XEM CHI TIẾT</a>
+            </div>
+          </div>
+
+          <div class="web-card">
+            <img src="image/web_03.jpg" onerror="this.src='https://picsum.photos/seed/w3/400/533'" alt="Website Đồng Hồ" loading="lazy">
+            <div class="web-card-overlay"></div>
+            <div class="web-card-content">
+              <div class="web-card-tag">THƯƠNG MẠI</div>
+              <div class="web-card-title">Shop Online Đồng Hồ CoCo</div>
+              <div class="web-card-desc">Cửa hàng thương mại điện tử với giỏ hàng, thanh toán online đầy đủ.</div>
+              <a href="duanweb.html" class="web-card-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> XEM CHI TIẾT</a>
+            </div>
+          </div>
+
+          <div class="web-card">
+            <img src="image/web_04.jpg" onerror="this.src='https://picsum.photos/seed/w4/400/533'" alt="Website Resort" loading="lazy">
+            <div class="web-card-overlay"></div>
+            <div class="web-card-content">
+              <div class="web-card-tag">RESORT &amp; HOTEL</div>
+              <div class="web-card-title">Booking Resort Phan Thiết</div>
+              <div class="web-card-desc">Hệ thống đặt phòng trực tuyến, tích hợp thanh toán và quản lý lịch.</div>
+              <a href="duanweb.html" class="web-card-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> XEM CHI TIẾT</a>
+            </div>
+          </div>
+
+          <div class="web-card">
+            <img src="image/web_05.jpg" onerror="this.src='https://picsum.photos/seed/w5/400/533'" alt="Website Portfolio" loading="lazy">
+            <div class="web-card-overlay"></div>
+            <div class="web-card-content">
+              <div class="web-card-tag">PORTFOLIO</div>
+              <div class="web-card-title">Portfolio Cá Nhân Creative</div>
+              <div class="web-card-desc">Thiết kế portfolio sáng tạo, hiệu ứng 3D, tối ưu hiển thị dự án.</div>
+              <a href="duanweb.html" class="web-card-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> XEM CHI TIẾT</a>
+            </div>
+          </div>
+
+          <div class="web-card">
+            <img src="image/web_06.jpg" onerror="this.src='https://picsum.photos/seed/w6/400/533'" alt="Website Agency" loading="lazy">
+            <div class="web-card-overlay"></div>
+            <div class="web-card-content">
+              <div class="web-card-tag">AGENCY</div>
+              <div class="web-card-title">Website Marketing Agency</div>
+              <div class="web-card-desc">Giao diện chuyên nghiệp cho công ty marketing, tích hợp CRM nhẹ.</div>
+              <a href="duanweb.html" class="web-card-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> XEM CHI TIẾT</a>
+            </div>
+          </div>
+
+          <div class="web-card">
+            <img src="image/web_07.jpg" onerror="this.src='https://picsum.photos/seed/w7/400/533'" alt="Website Nhà Hàng" loading="lazy">
+            <div class="web-card-overlay"></div>
+            <div class="web-card-content">
+              <div class="web-card-tag">NHÀ HÀNG</div>
+              <div class="web-card-title">Website Nhà Hàng Hải Sản</div>
+              <div class="web-card-desc">Menu online, đặt bàn và thực đơn đầy đủ cho nhà hàng cao cấp.</div>
+              <a href="duanweb.html" class="web-card-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> XEM CHI TIẾT</a>
+            </div>
+          </div>
+
+          <div class="web-card">
+            <img src="image/web_08.jpg" onerror="this.src='https://picsum.photos/seed/w8/400/533'" alt="Website Blog" loading="lazy">
+            <div class="web-card-overlay"></div>
+            <div class="web-card-content">
+              <div class="web-card-tag">BLOG / CMS</div>
+              <div class="web-card-title">Blog Chia Sẻ Kiến Thức</div>
+              <div class="web-card-desc">Nền tảng blog hiện đại với hệ thống quản lý nội dung dễ dùng.</div>
+              <a href="duanweb.html" class="web-card-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> XEM CHI TIẾT</a>
+            </div>
+          </div>
+
+        </div><!-- /track -->
+      </div><!-- /viewport -->
+      <div class="arc-hint">🖱 <span>KÉO</span> để duyệt · tự động cuộn · rê chuột để dừng</div>
+    </div>
   </div>
 </section>
 
@@ -594,7 +807,7 @@
       <div class="contact-left reveal-left">
         <div class="section-label">LIÊN HỆ</div>
         <h2 class="section-heading">LIÊN<br><span class="outline">HỆ</span></h2>
-        <p style="color:#888;font-size:.9rem;margin-top:1rem;line-height:1.75">Sẵn sàng hợp tác cho dự án của bạn. Liên hệ ngay để được tư vấn miễn phí và nhận báo giá trong 24 giờ.</p>
+        <p style="color:#fff;font-size:.9rem;margin-top:1rem;line-height:1.75">Sẵn sàng hợp tác cho dự án của bạn. Liên hệ ngay để được tư vấn miễn phí và nhận báo giá trong 24 giờ.</p>
         <div class="contact-info">
           <div class="contact-row">
             <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
@@ -657,7 +870,7 @@
         pl.classList.add('hidden');
         document.body.classList.remove('loading');
         setTimeout(()=>{
-          const proj=document.getElementById('projects');
+          const proj=document.getElementById('web-projects');
           if(proj) proj.scrollIntoView({behavior:'smooth',block:'start'});
         },350);
       },500);
@@ -748,6 +961,110 @@ document.querySelectorAll('section[id]').forEach(s=>{
     });
   },{threshold:0.35}).observe(s);
 });
+
+/* ══ ARC CAROUSEL ══ */
+(function(){
+  const viewport = document.getElementById('arcViewport');
+  const track    = document.getElementById('arcTrack');
+  if (!viewport || !track) return;
+
+  /* ── Clone cards for infinite loop ── */
+  const origCards = Array.from(track.children);
+  origCards.forEach(c => track.appendChild(c.cloneNode(true)));
+
+  let currentX   = 0;
+  let rafId      = null;
+  let isPaused   = false;
+  let isDragging = false;
+  let dragStartX = 0;
+  let dragStartTranslate = 0;
+  const SPEED    = 0.55; // px / frame
+
+  function getSetWidth() {
+    return origCards.reduce((sum, c) => {
+      return sum + c.offsetWidth + 25.6; /* gap 1.6rem ≈ 25.6px */
+    }, 0);
+  }
+
+  /* ── Arc transform ── */
+  function applyArc() {
+    const vw = viewport.offsetWidth;
+    const vcx = vw / 2;
+    const allCards = track.querySelectorAll('.web-card');
+    allCards.forEach(card => {
+      const r = card.getBoundingClientRect();
+      const cardCX = r.left - viewport.getBoundingClientRect().left + r.width / 2;
+      const diff   = (cardCX - vcx) / (vw / 1.8);
+      const clamped = Math.max(-1.4, Math.min(1.4, diff));
+      const yOff   = Math.pow(clamped, 2) * 55;
+      const rot    = clamped * 5.5;
+      const sc     = 1 - Math.abs(clamped) * 0.06;
+      card.style.transform = `translateY(${yOff}px) rotate(${rot}deg) scale(${sc})`;
+    });
+  }
+
+  /* ── Main loop ── */
+  function loop() {
+    if (!isPaused && !isDragging) {
+      currentX -= SPEED;
+      const setW = getSetWidth();
+      if (Math.abs(currentX) >= setW) currentX += setW;
+      track.style.transform = `translateX(${currentX}px)`;
+    }
+    applyArc();
+    rafId = requestAnimationFrame(loop);
+  }
+  rafId = requestAnimationFrame(loop);
+
+  /* ── Hover pause ── */
+  viewport.addEventListener('mouseenter', () => { isPaused = true; });
+  viewport.addEventListener('mouseleave', () => { if (!isDragging) isPaused = false; });
+
+  /* ── Mouse drag ── */
+  viewport.addEventListener('mousedown', e => {
+    isDragging = true; isPaused = true;
+    dragStartX = e.clientX; dragStartTranslate = currentX;
+    track.style.transition = 'none';
+  });
+  document.addEventListener('mousemove', e => {
+    if (!isDragging) return;
+    const dx = e.clientX - dragStartX;
+    currentX = dragStartTranslate + dx;
+    const setW = getSetWidth();
+    if (currentX > 0) currentX -= setW;
+    if (Math.abs(currentX) > setW) currentX += setW;
+    track.style.transform = `translateX(${currentX}px)`;
+  });
+  document.addEventListener('mouseup', () => {
+    if (!isDragging) return;
+    isDragging = false; isPaused = false;
+    track.style.transition = '';
+  });
+
+  /* ── Touch drag ── */
+  viewport.addEventListener('touchstart', e => {
+    isDragging = true; isPaused = true;
+    dragStartX = e.touches[0].clientX; dragStartTranslate = currentX;
+  }, { passive: true });
+  viewport.addEventListener('touchmove', e => {
+    if (!isDragging) return;
+    const dx = e.touches[0].clientX - dragStartX;
+    currentX = dragStartTranslate + dx;
+    const setW = getSetWidth();
+    if (currentX > 0) currentX -= setW;
+    if (Math.abs(currentX) > setW) currentX += setW;
+    track.style.transform = `translateX(${currentX}px)`;
+  }, { passive: true });
+  viewport.addEventListener('touchend', () => {
+    isDragging = false; isPaused = false;
+  });
+
+  /* ── Cursor expand for web-cards ── */
+  document.querySelectorAll('.web-card,.btn-view-all').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
+  });
+})();
 
 /* ── FORM ── */
 document.querySelector('.btn-submit').addEventListener('click',()=>{
