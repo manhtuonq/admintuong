@@ -129,8 +129,8 @@
     #about { background: var(--bg2); }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
     .about-photo-placeholder { width: 100%; aspect-ratio: 4/5; background: var(--surface); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: 2rem; position: relative; overflow: hidden; border: 1px solid var(--border); }
-    .about-photo-placeholder::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(14,14,14,.92) 0%, rgba(14,14,14,.2) 50%, transparent 100%); }
-    .ap-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; opacity: 1; }
+    .about-photo-placeholder::before { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(to top, rgba(14,14,14,.88) 0%, rgba(14,14,14,.15) 45%, transparent 100%); pointer-events: none; }
+    .ap-img { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; opacity: 1; display: block; }
     .about-name-overlay { position: relative; z-index: 1; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.8rem; line-height: 1; }
     .about-role-overlay { position: relative; z-index: 1; font-family: 'Barlow Condensed', sans-serif; font-size: .72rem; letter-spacing: .18em; color: var(--accent); display: flex; align-items: center; gap: .5rem; margin-top: .4rem; }
     .stat-badge { position: absolute; top: 1.5rem; right: -1.5rem; background: var(--bg); border: 1px solid var(--border); padding: 1rem 1.4rem; border-radius: 4px; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
@@ -488,7 +488,7 @@
     <div class="about-grid">
       <div style="position:relative" class="reveal-left">
         <div class="about-photo-placeholder">
-          <img class="ap-img" src="https://scontent.fsgn8-2.fna.fbcdn.net/v/t39.30808-6/678482994_1885918928776114_3790228706178703280_n.jpg?stp=dst-jpg_tt6&cstp=mx1512x1519&ctp=s1512x1519&_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHiG0U8j_dCN4f10cI8Vx_FbTMU1fcXfUZtMxTV9xd9RjXHIkdsrhCbRcUycPsiQPjHx9rtTI4XkeklwaIMsXru&_nc_ohc=DZZRV--9NhIQ7kNvwGH9_jy&_nc_oc=AdqBsM9HTynGVplKkrRWI_8WAKj_bxbS46FRroxt-pv5aTz-T2gHsGYGnU37vCE9pyqOrD4HzSz7Qbsp68FyStYR&_nc_zt=23&_nc_ht=scontent.fsgn8-2.fna&_nc_gid=LtabuwIwb6z5ovOhaRSAXA&_nc_ss=7b2a8&oh=00_Af-Nd3a-5t-9GD2DeMu9aZQRLy7-t5bUEBcAya-kD_Klcw&oe=6A2DFB6E" alt="Ha Trong Manh Tuong" />
+          <img class="ap-img" src="https://scontent.fsgn8-2.fna.fbcdn.net/v/t39.30808-6/678482994_1885918928776114_3790228706178703280_n.jpg?stp=dst-jpg_tt6&cstp=mx1512x1519&ctp=s1512x1519&_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHiG0U8j_dCN4f10cI8Vx_FbTMU1fcXfUZtMxTV9xd9RjXHIkdsrhCbRcUycPsiQPjHx9rtTI4XkeklwaIMsXru&_nc_ohc=yV_oo-sI0Z0Q7kNvwHyMR09&_nc_oc=AdoK8LZddqpeJMi1E2SacDuUeXJqwPxcVxraM94EN_02H3Rrog8U0bkPQCWcDh9sHKZ-AuH83cUHg8-BtqLhRpJv&_nc_zt=23&_nc_ht=scontent.fsgn8-2.fna&_nc_gid=_qhE1vor42O1HSHqr8nK6Q&_nc_ss=7b2a8&oh=00_Af8VyYn06g_zC5pi8t5p2JXpg0-WigYOczrmUYCJkw2Xdw&oe=6A38876E" alt="Ha Trong Manh Tuong" referrerpolicy="no-referrer" />
           <div class="about-name-overlay">HA TRONG<br>MANH TUONG</div>
           <div class="about-role-overlay"><i class="fa-solid fa-circle" style="font-size:.5rem"></i> FOUNDER · PHAN THIẾT</div>
         </div>
@@ -652,7 +652,7 @@
           </div>
 
           <div class="web-card">
-            <img src="https://scontent.fsgn8-2.fna.fbcdn.net/v/t39.30808-6/678482994_1885918928776114_3790228706178703280_n.jpg?stp=dst-jpg_tt6&cstp=mx1512x1519&ctp=s1512x1519&_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHiG0U8j_dCN4f10cI8Vx_FbTMU1fcXfUZtMxTV9xd9RjXHIkdsrhCbRcUycPsiQPjHx9rtTI4XkeklwaIMsXru&_nc_ohc=DZZRV--9NhIQ7kNvwGH9_jy&_nc_oc=AdqBsM9HTynGVplKkrRWI_8WAKj_bxbS46FRroxt-pv5aTz-T2gHsGYGnU37vCE9pyqOrD4HzSz7Qbsp68FyStYR&_nc_zt=23&_nc_ht=scontent.fsgn8-2.fna&_nc_gid=LtabuwIwb6z5ovOhaRSAXA&_nc_ss=7b2a8&oh=00_Af-Nd3a-5t-9GD2DeMu9aZQRLy7-t5bUEBcAya-kD_Klcw&oe=6A2DFB6E" alt="Website Portfolio" loading="lazy">
+            <img src="https://scontent.fsgn8-2.fna.fbcdn.net/v/t39.30808-6/678482994_1885918928776114_3790228706178703280_n.jpg?stp=dst-jpg_tt6&cstp=mx1512x1519&ctp=s1512x1519&_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHiG0U8j_dCN4f10cI8Vx_FbTMU1fcXfUZtMxTV9xd9RjXHIkdsrhCbRcUycPsiQPjHx9rtTI4XkeklwaIMsXru&_nc_ohc=yV_oo-sI0Z0Q7kNvwHyMR09&_nc_oc=AdoK8LZddqpeJMi1E2SacDuUeXJqwPxcVxraM94EN_02H3Rrog8U0bkPQCWcDh9sHKZ-AuH83cUHg8-BtqLhRpJv&_nc_zt=23&_nc_ht=scontent.fsgn8-2.fna&_nc_gid=_qhE1vor42O1HSHqr8nK6Q&_nc_ss=7b2a8&oh=00_Af8VyYn06g_zC5pi8t5p2JXpg0-WigYOczrmUYCJkw2Xdw&oe=6A38876E" alt="Website Portfolio" loading="lazy" referrerpolicy="no-referrer">
             <div class="web-card-overlay"></div>
             <div class="web-card-content">
               <div class="web-card-tag">PORTFOLIO</div>
